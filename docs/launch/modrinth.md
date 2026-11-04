@@ -4,15 +4,14 @@ Modrinth project settings (project YBz078rg, slug stonkcraft)
   Summary:     Paper-trade stocks and commodities at live prices, fund it by mining, and build trading bots from redstone.
   Categories:  Economy, Technology, Game Mechanics
   Environment: client required, server required
+  Disclosures: Contains AI-generated content (rules §6.1: the code, art scripts and copy were written with Claude)
   License:     MIT    Source: https://github.com/0xSemicolon/stonkcraft    Issues: .../issues
-  Icon:        docs/launch/media/stonkcraft-icon-512.png
-  Gallery:     docs/launch/media/stonkcraft-banner.png, then terminal, unit_bridge, build_menu, trade_executor,
+  Icon:        replace with an owner-made icon (the current one is AI-derived; see rules §6.2)
+  Gallery:     terminal, unit_bridge, build_menu, trade_executor,
                copy_desk, blocks (.jpg)
   Versions:    pushing a v* tag publishes one (.github/workflows/build.yml)
 The body below goes in the Description field.
 -->
-
-![Stonkcraft](https://raw.githubusercontent.com/0xSemicolon/stonkcraft/main/docs/launch/media/stonkcraft-banner.png)
 
 **Stonkcraft is a paper-trading mod.** It brings live prices for stocks, indices and commodities (Apple, Nvidia, the
 S&P 500, gold, silver, oil, natural gas, the euro and more) into your world, and lets you trade them with in-game money
@@ -23,7 +22,7 @@ ever leaves the game.
 
 ### How it plays
 
-- **Mine for your stake.** Money is earned, not handed out. Bridge ores, gems, redstone and fuel at a **UNIT[XYZ]**
+- **Mine for your stake.** Money is earned, not handed out. Sell ores, gems, redstone and fuel at a **Commodity Exchange**
   block and they're credited at a live commodity price: gold as gold, iron as silver, diamonds as palladium, redstone
   as chip stocks, coal as natural gas, a lava bucket as a barrel of crude. Withdraw profits back out as ingots.
 - **Craft your trading floor.** Press **H** for the build menu. It shows every block's recipe and what you're
@@ -41,7 +40,7 @@ ever leaves the game.
   Desk** follows any public trading account, live, on your paper account.
 - **Wall Street speedrun**: mine, trade, withdraw, kill the dragon. `/stonk speedrun start`.
 
-![The UNIT bridge](https://raw.githubusercontent.com/0xSemicolon/stonkcraft/main/docs/launch/media/unit_bridge.jpg)
+![The Commodity Exchange](https://raw.githubusercontent.com/0xSemicolon/stonkcraft/main/docs/launch/media/unit_bridge.jpg)
 
 ### Install
 
@@ -59,8 +58,7 @@ data, has no telemetry, and makes no other connections.
 - Everything is paper trading. Nothing in the game is worth real money, and nothing here is financial advice.
 - The terminal also lists the data feed's other futures and spot markets alongside stocks and commodities.
 - It's a fan project, not affiliated with or endorsed by any exchange or data provider, the NYSE or Mojang.
-- Stock logos are off by default (they're other companies' trademarks). Set `"stockLogos": true` in
-  `config/stonkcraft-client.json` to turn them on.
+- Markets are shown with generic pictures or lettered badges, never other companies' logos.
 - Server owners: `config/stonkcraft.json` controls starter grants, the paper mint, leverage and fees.
 
 Source, full docs and issues: [GitHub](https://github.com/0xSemicolon/stonkcraft)

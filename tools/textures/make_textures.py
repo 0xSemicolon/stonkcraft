@@ -374,20 +374,20 @@ def blocks():
     cv = standard_side('vault_top', lambda c: (c.rect(3, 6, 12, 9, GOLD_LO), c.rect(3, 6, 12, 8, GOLD), c.rect(4, 6, 11, 6, GOLD_HI)))
     out['block/vault_top'] = cv.save('block/vault_top.png')
 
-    # UNIT[XYZ]: a gold bar and a copper bar behind glass, the UNIT mark above
+    # Commodity Exchange: goods-for-money arrows over a gold bar and a copper bar behind glass
     copper, copper_hi, copper_lo = hexc('#d9844a'), hexc('#f5b98a'), hexc('#8a4a22')
-    small = {'U': ['#.#', '#.#', '#.#', '#.#', '###'], 'N': ['##.', '#.#', '#.#', '#.#', '#.#'], 'I': ['###', '.#.', '.#.', '.#.', '###'],
-             'T': ['###', '.#.', '.#.', '.#.', '.#.'], 'X': ['#.#', '#.#', '.#.', '#.#', '#.#'], 'Y': ['#.#', '#.#', '.#.', '.#.', '.#.'],
-             'Z': ['###', '..#', '.#.', '#..', '###']}
     cv = Canvas()
     graphite(cv)
-    for i, ch in enumerate('UNIT'):
-        cv.bitmap(1 + i * 4, 2, small[ch], {'#': GOLD_LO})
-        cv.bitmap(0 + i * 4 + 1, 1, small[ch], {'#': GOLD})
-        cv.px(1 + i * 4, 1, GOLD_HI)
-    for i, ch in enumerate('XYZ'):
-        cv.bitmap(3 + i * 4, 7, small[ch], {'#': MINT_LO})
-        cv.bitmap(3 + i * 4, 6, small[ch], {'#': MINT})
+    # a gold arrow right over a mint arrow left: the exchange mark, each with a drop shadow
+    for dy, gold in ((1, GOLD_LO), (0, GOLD)):
+        cv.rect(2, 3 + dy, 12, 3 + dy, gold)
+        for k, (x, y) in enumerate([(10, 1), (11, 2), (12, 3), (11, 4), (10, 5)]):
+            cv.px(x + 1, y + dy, gold)
+    for dy, mint in ((1, MINT_LO), (0, MINT)):
+        cv.rect(3, 7 + dy, 13, 7 + dy, mint)
+        for (x, y) in [(4, 5), (3, 6), (2, 7), (3, 8), (4, 9)]:
+            cv.px(x, y + dy, mint)
+    cv.px(13, 3, GOLD_HI)
     screen(cv, 1, 11, 14, 15)
     bar(cv, 2, 12, 5, GOLD, GOLD_HI, GOLD_LO)
     bar(cv, 9, 12, 5, copper, copper_hi, copper_lo)
@@ -524,7 +524,7 @@ def items():
 
 
 # ---------------------------------------------------------------- market logos
-# Only markets that trade on Hyperliquid or trade[xyz] get a logo; delisted ones (DXY, VIX, NIFTY, IBOV, SNAP, TON, TTF, TTWO) don't.
+# Generic market pictures only; every other market gets a lettered badge in its own colour.
 
 def badge(c, ring=None):
     cv = Canvas()
@@ -557,144 +557,14 @@ def logos():
     def save(name, cv):
         L[name] = cv.save('logo/' + name.lower() + '.png')
 
-    # --- crypto
-    cv = badge(hexc('#f7931a'))
-    glyph(cv, ['..#.#..', '######.', '.##..##', '.#####.', '.##..##', '.##..##', '######.', '..#.#..'],
-          {'#': WHITE}, shadow=hexc('#9a5200'))
-    save('BTC', cv)
-    cv = badge(hexc('#454a75'))
-    glyph(cv, ['...#...', '..###..', '.##W##.', '##WWW##', '#WWWWW#', '.#WWW#.', '..#W#..', '#..#..#', '.#.#.#.', '..###..', '...#...'],
-          {'#': hexc('#c4c8f2'), 'W': hexc('#8a90d4')})
-    save('ETH', cv)
-    cv = badge(hexc('#111111'))
-    for i, y in enumerate((4, 7, 10)):
-        for dx in range(9):
-            c = mix(hexc('#9945ff'), hexc('#14f195'), dx / 8)
-            off = 1 if i == 1 else 0
-            cv.px(3 + dx + (1 - off), y, c)
-            cv.px(4 + dx - off, y + 1, shade(c, -0.25))
-    save('SOL', cv)
-    cv = badge(hexc('#0a2a24'), hexc('#97fce4'))
-    glyph(cv, ['.##....##.', '#..#..#..#', '#...##...#', '#..#..#..#', '.##....##.'], {'#': hexc('#97fce4')})
-    save('HYPE', cv)
-    cv = badge(hexc('#c2a633'))
-    glyph(cv, ['.####..', '.#...#.', '.#....#', '####..#', '.#....#', '.#...#.', '.####..'], {'#': WHITE}, shadow=hexc('#6b5810'))
-    save('DOGE', cv)
-    cv = badge(hexc('#23292f'))
-    glyph(cv, ['#.....#', '##...##', '.#####.', '.......', '.#####.', '##...##', '#.....#'], {'#': WHITE})
-    save('XRP', cv)
-    cv = badge(hexc('#1e2026'))
-    glyph(cv, ['...#...', '..#.#..', '.#.#.#.', '#.###.#', '.#.#.#.', '..#.#..', '...#...'], {'#': hexc('#f3ba2f')})
-    save('BNB', cv)
-    cv = badge(hexc('#e84142'))
-    glyph(cv, ['...#...', '..###..', '..###..', '.#####.', '.##.##.', '###..##'], {'#': WHITE})
-    save('AVAX', cv)
-    cv = badge(hexc('#2a5ada'))
-    glyph(cv, ['..##..', '.#..#.', '#....#', '#....#', '.#..#.', '..##..'], {'#': WHITE})
-    save('LINK', cv)
-    cv = badge(hexc('#4da2ff'))
-    glyph(cv, ['...#...', '..###..', '.#####.', '##.####', '##..###', '.#####.', '..###..'], {'#': WHITE})
-    save('SUI', cv)
-    cv = badge(hexc('#0033ad'))
-    for (x, y) in [(7, 3), (4, 5), (10, 5), (7, 7), (4, 9), (10, 9), (7, 11), (5, 7), (9, 7)]:
-        cv.px(x, y, WHITE)
-        cv.px(x + 1, y, WHITE)
-    save('ADA', cv)
-    cv = badge(hexc('#97fce4'))
-    glyph(cv, ['#.....#', '##...##', '#######', '#.###.#', '#######', '##...##', '.#####.'], {'#': hexc('#0a2a24')})
-    save('PURR', cv)
-    cv = badge(hexc('#4c9a2a'))
-    glyph(cv, ['.##.##.', '#WK#WK#', '#######', '#######', '#RRRRR#', '.#####.'],
-          {'#': hexc('#7bd34b'), 'W': WHITE, 'K': hexc('#111111'), 'R': hexc('#b0483e')})
-    save('PEPE', cv)
-    cv = badge(hexc('#2775ca'))
-    glyph(cv, FONT['$'], {'#': WHITE}, shadow=hexc('#123c6b'))
-    save('USDC', cv)
-    for sym, col, s in (('LTC', '#345d9d', 'L'), ('DOT', '#e6007a', 'D'), ('TRX', '#ff060a', 'T'), ('ARB', '#2d374b', 'A'),
-                        ('OP', '#ff0420', 'OP'), ('APT', '#111111', 'A'), ('NEAR', '#111111', 'N'), ('TAO', '#111111', 'T'),
-                        ('ENA', '#1a1a1a', 'E'), ('WIF', '#c89b6d', 'W'), ('ZEC', '#f4b728', 'Z'),
-                        ('XMR', '#ff6600', 'M'), ('AAVE', '#9a5cc6', 'A'), ('UNI', '#ff007a', 'U'), ('INJ', '#0082fa', 'I'),
-                        ('BCH', '#8dc351', 'B'), ('ETC', '#328332', 'E'), ('FET', '#1f2a44', 'F'), ('PAXG', '#e4c15a', 'P')):
-        cv = badge(hexc(col))
-        letters(cv, s, WHITE, shade(hexc(col), -0.5))
-        save(sym, cv)
-
-    # --- stocks
-    cv = badge(hexc('#f2f2f2'))
-    glyph(cv, ['.....#...', '....#....', '.##.#.##.', '#########', '########.', '########.', '#########', '.#######.', '..##.##..'],
-          {'#': hexc('#1d1d1f')})
-    save('AAPL', cv)
-    cv = badge(hexc('#111111'))
-    glyph(cv, ['..#####.', '.##...##', '##.###.#', '#.##.#.#', '##.###.#', '.##...##', '..#####.'], {'#': hexc('#76b900')})
-    save('NVDA', cv)
-    cv = badge(hexc('#e31937'))
-    glyph(cv, ['#######', '#.....#', '...#...', '...#...', '...#...', '...#...', '...#...'], {'#': WHITE})
-    save('TSLA', cv)
-    cv = badge(hexc('#f2f2f2'))
-    cv.rect(3, 3, 7, 7, hexc('#f25022'))
-    cv.rect(8, 3, 12, 7, hexc('#7fba00'))
-    cv.rect(3, 8, 7, 12, hexc('#00a4ef'))
-    cv.rect(8, 8, 12, 12, hexc('#ffb900'))
-    save('MSFT', cv)
-    cv = badge(hexc('#232f3e'))
-    letters(cv, 'A', WHITE, y=3)
-    glyph(cv, ['#........#', '.##....##.', '...####.#.'], {'#': hexc('#ff9900')}, y=10)
-    save('AMZN', cv)
-    cv = badge(hexc('#f2f2f2'))
-    glyph(cv, ['..RRRR.', '.R....R', 'B......', 'B...YYY', 'B.....G', '.G....G', '..GGGG.'],
-          {'R': hexc('#ea4335'), 'B': hexc('#4285f4'), 'Y': hexc('#4285f4'), 'G': hexc('#34a853')})
-    save('GOOGL', cv)
-    cv = badge(hexc('#f2f2f2'))
-    glyph(cv, ['.##....##.', '#..#..#..#', '#...##...#', '#..#..#..#', '.##....##.'], {'#': hexc('#0668e1')})
-    save('META', cv)
-    cv = badge(hexc('#111111'))
-    glyph(cv, FONT['N'], {'#': hexc('#e50914')}, shadow=hexc('#5a0006'))
-    save('NFLX', cv)
-    cv = badge(hexc('#111111'))
-    glyph(cv, ['..#####', '...####', '..#..##', '.##..##', '####..#', '#####..'], {'#': WHITE})
-    save('AMD', cv)
-    cv = badge(hexc('#101113'))
-    glyph(cv, ['.###.', '#...#', '#...#', '.###.', '.....', '#####'], {'#': WHITE})
-    save('PLTR', cv)
-    cv = badge(hexc('#0052ff'))
-    glyph(cv, ['.####.', '#....#', '#.....', '#.....', '#....#', '.####.'], {'#': WHITE})
-    save('COIN', cv)
-    cv = badge(hexc('#ccff00'))
-    glyph(cv, ['....##', '...##.', '..##..', '.##...', '##....', '#.....'], {'#': hexc('#111111')})
-    save('HOOD', cv)
-    cv = badge(hexc('#c74634'))
-    glyph(cv, ['.######.', '#......#', '#......#', '.######.'], {'#': WHITE})
-    save('ORCL', cv)
-    for sym, col, s in (('INTC', '#0068b5', 'I'), ('MU', '#1d4b9c', 'MU'), ('TSM', '#cc0000', 'T'), ('LLY', '#d52b1e', 'L'),
-                        ('COST', '#e31837', 'C'), ('BABA', '#ff6a00', 'B'), ('GME', '#111111', 'G'), ('MSTR', '#f7931a', 'M'),
-                        ('CRCL', '#2775ca', 'C'), ('AVGO', '#cc092f', 'B'), ('IBM', '#0f62fe', 'IB'), ('ARM', '#0091bd', 'A'),
-                        ('ASML', '#10069f', 'A'), ('DELL', '#007db8', 'D'), ('QCOM', '#3253dc', 'Q'), ('RKLB', '#111111', 'R'),
-                        ('EBAY', '#e53238', 'E'), ('CRWD', '#e01e2c', 'C'), ('NET', '#f38020', 'N'),
-                        ('RDDT', '#ff4500', 'R'), ('HIMS', '#5b8a72', 'H'), ('DKNG', '#53d337', 'D'), ('MRVL', '#d62e2e', 'M'),
-                        ('BX', '#111111', 'BX'), ('NOW', '#62d84e', 'N'), ('ZM', '#2d8cff', 'Z'), ('CVX', '#0054a4', 'C'),
-                        ('SMSN', '#1428a0', 'S'), ('SOFTBANK', '#c0c0c0', 'S'), ('HYUNDAI', '#002c5f', 'H'), ('GEV', '#3b8686', 'G'),
-                        ('LRCX', '#0076c0', 'L'), ('AMAT', '#3a5ba0', 'A')):
-        cv = badge(hexc(col))
-        fg = hexc('#111111') if sum(hexc(col)[:3]) > 520 else WHITE
-        letters(cv, s, fg, shade(hexc(col), -0.5))
-        save(sym, cv)
-
-    # --- indices, FX, volatility
+    # Only generic pictures ship: metals, energy, currencies, and a candlestick mark for the S&P 500. Companies',
+    # funds' and crypto projects' logos are their owners' trademarks, so those markets get a lettered badge at runtime.
     cv = badge(hexc('#0b1f33'))
     for x, top, bot, c in ((4, 7, 11, GREEN), (6, 6, 10, GREEN), (8, 7, 10, RED), (10, 4, 8, GREEN), (12, 3, 6, GREEN)):
         for y in range(top, bot + 1):
             cv.px(x, y, c)
         cv.px(x, top - 1, shade(c, -0.4))
     save('SP500', cv)
-    cv = badge(hexc('#111111'), hexc('#f2f2f2'))
-    glyph(cv, FONT['X'], {'#': WHITE})
-    save('XYZ100', cv)
-    for sym, col, s in (('JP225', '#bc002d', 'JP'), ('KR200', '#003478', 'KR'), 
-                        ('TLT', '#2a3f5f', 'T'), ('SMH', '#3b2a5f', 'S'), ('XLE', '#5f3b2a', 'E'),
-                        ('EWJ', '#bc002d', 'J'), ('EWY', '#003478', 'K'), ('EWZ', '#009c3b', 'B'), ('EWT', '#fe0000', 'T')):
-        cv = badge(hexc(col))
-        letters(cv, s, WHITE, shade(hexc(col), -0.5))
-        save(sym, cv)
     for sym, col, g in (('EUR', '#003399', ['..###', '.#...', '####.', '.#...', '####.', '.#...', '..###']),
                         ('JPY', '#bc002d', ['#...#', '.#.#.', '..#..', '#####', '..#..', '#####', '..#..']),
                         ('GBP', '#012169', ['..##.', '.#..#', '.#...', '###..', '.#...', '.#...', '#####'])):

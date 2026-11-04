@@ -16,7 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 /**
- * UNIT[XYZ], two tabs over one grid of goods. Deposit: lit goods are what you carry, and clicking one bridges it in, as a
+ * Commodity Exchange, two tabs over one grid of goods. Deposit: lit goods are what you carry, and clicking one bridges it in, as a
  * spot balance or a 1x long. Withdraw: lit goods are what the account holds here, and clicking one picks it to take out.
  */
 public class UnitBridgeScreen extends HcScreen {
@@ -34,7 +34,7 @@ public class UnitBridgeScreen extends HcScreen {
 	private int detailY = -1;
 
 	public UnitBridgeScreen(JsonObject data) {
-		super("UNIT[XYZ]");
+		super("Commodity Exchange");
 		info = data;
 		this.pos = data.get("pos").getAsLong();
 		this.seenResult = ClientState.lastVaultAt;
@@ -71,7 +71,7 @@ public class UnitBridgeScreen extends HcScreen {
 
 	@Override
 	protected String titleText() {
-		return "UNIT[XYZ]  goods ⇄ account";
+		return "Commodity Exchange";
 	}
 
 	@Override
@@ -99,7 +99,7 @@ public class UnitBridgeScreen extends HcScreen {
 			usd += n * Math.max(0, t.get("price").getAsDouble());
 		}
 		return (info.has("viaCard") && info.get("viaCard").getAsBoolean() ? "Card account" : "Your selected account")
-				+ " · " + (held.isEmpty() ? "nothing bridged here yet" : "holds " + Fmt.usd(usd) + ": " + held);
+				+ " · " + (held.isEmpty() ? "nothing deposited here yet" : "holds " + Fmt.usd(usd) + ": " + held);
 	}
 
 	@Override

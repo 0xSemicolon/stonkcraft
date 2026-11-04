@@ -13,7 +13,7 @@ import net.minecraft.client.gui.screens.Screen;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * How money gets into a paper account: bridge goods at a UNIT[XYZ], or deposit coins withdrawn from an account (and
+ * How money gets into a paper account: bridge goods at a Commodity Exchange, or deposit coins withdrawn from an account (and
  * the paper mint, where a server turns it on). Watch accounts mirror an address and can't be funded.
  */
 public class FundScreen extends HcScreen {
@@ -105,9 +105,9 @@ public class FundScreen extends HcScreen {
 					+ "use its card in sensors, displays, signals and copy desks.", Ui.DIM);
 			return;
 		}
-		// money is earned: goods in at a UNIT[XYZ] is the way in, coins only move money that's already there
-		f.heading("1 · Bridge goods at a UNIT[XYZ]");
-		f.text("Gold, copper, iron, diamonds, emeralds, redstone, quartz, glowstone, coal, lava and blaze rods are money: right-click a UNIT[XYZ] "
+		// money is earned: goods in at a Commodity Exchange is the way in, coins only move money that's already there
+		f.heading("1 · Sell goods at a Commodity Exchange");
+		f.text("Gold, copper, iron, diamonds, emeralds, redstone, quartz, glowstone, coal, lava and blaze rods are money: right-click a Commodity Exchange "
 				+ "holding this account's Trade Card with them, or click them on its screen, to deposit them at a live price.", Ui.TEXT);
 		f.rule();
 		f.heading("2 · Coins you carry");

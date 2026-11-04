@@ -135,7 +135,7 @@ public class VaultScreen extends HcScreen {
 				ClientNet.send("deposit_coins", o);
 			})).tip("Moves every paper coin you carry into this account");
 			y = f.row(null, ROW);
-			f.add(new HcButton(f.left, y, f.width, ROW, "+ Fund…", b -> minecraft.setScreen(new FundScreen(id, this)))).tip("Mint free paper money, or bridge mined metal");
+			f.add(new HcButton(f.left, y, f.width, ROW, "+ Fund…", b -> minecraft.setScreen(new FundScreen(id, this)))).tip("Mint free paper money, or sell mined goods");
 		}
 		f.rule();
 		f.heading("Cards & sharing");

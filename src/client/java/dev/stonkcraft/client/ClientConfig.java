@@ -20,8 +20,6 @@ public final class ClientConfig {
 	public double orderUsd = 100;
 	/** The welcome screen has been shown and closed. */
 	public boolean welcomed = false;
-	/** Draw company and fund logos on stock markets. Off: they get lettered badges like any unlogoed market. */
-	public boolean stockLogos = false;
 	/** The order form's size is in coin rather than USD. */
 	public boolean sizeInCoin = false;
 	/** The order form's TP/SL boxes take prices rather than distances. */

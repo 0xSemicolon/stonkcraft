@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * UNIT[XYZ]: turns metal into account equity and back. Deposits credit a Unit token's spot balance, or a fully
+ * Commodity Exchange: turns metal into account equity and back. Deposits credit a Unit token's spot balance, or a fully
  * collateralised long on the token's reference perp; withdrawals take metal back out of either, a long prorated by
  * its leverage (see {@link PaperAccount#withdrawLong}). A fee ({@link UnitConfig#feeBps}) applies each way.
  */
@@ -93,7 +93,7 @@ public final class UnitBridge {
 	public static Result deposit(PaperAccount acct, @Nullable MarketData md, String itemId, long count, Mode mode) {
 		UnitConfig cfg = UnitConfig.get();
 		UnitConfig.Token t = cfg.tokenFor(itemId);
-		if (t == null || count <= 0) return Result.fail("A UNIT[XYZ] doesn't take that");
+		if (t == null || count <= 0) return Result.fail("A Commodity Exchange doesn't take that");
 		double px = price(md, t);
 		if (Double.isNaN(px)) return Result.fail("No " + t.token + " price yet (" + t.priceMarket + ")");
 		double units = t.per(itemId) * count * (1 - cfg.fee());
@@ -107,7 +107,7 @@ public final class UnitBridge {
 			acct.creditSpot(t.market(), units, px);
 			where = t.token;
 		}
-		return new Result(true, String.format("Bridged %s %s of %s in as %s (%s)", Fmt.size(units), t.unit, t.token.substring(1).toLowerCase(),
+		return new Result(true, String.format("Deposited %s %s of %s as %s (%s)", Fmt.size(units), t.unit, t.token.substring(1).toLowerCase(),
 				where, Fmt.usd(units * px)), units, units * px, List.of());
 	}
 

@@ -15,7 +15,7 @@ import net.minecraft.world.level.Level;
 
 /**
  * A card for one account, in two kinds. A Trade Card acts on the account: executors, kill switches, leverage dials,
- * a copy desk's follower slot and UNIT[XYZ] take only these. A Watch Card only looks: sensors, displays, mixer inputs
+ * a copy desk's follower slot and Commodity Exchange take only these. A Watch Card only looks: sensors, displays, mixer inputs
  * and a copy desk's leader slot take either kind. Unprinted, the trade item is the Blank Card both are printed on.
  * The account's own record of the card decides what it may do; the item says so at a glance.
  */
@@ -52,7 +52,7 @@ public class AccountCardItem extends Item {
 		} else {
 			lines.add(Component.literal(ref.cardId().isEmpty() && ref.level().isEmpty() ? "Old card: reprint it from the vault" : "Trades the account")
 					.withStyle(ChatFormatting.GOLD));
-			lines.add(Component.literal("For Trade Executors, Kill Switches, Leverage Dials, UNIT[XYZ] and a Copy Desk's follower; works anywhere a Watch Card does")
+			lines.add(Component.literal("For Trade Executors, Kill Switches, Leverage Dials, Commodity Exchange and a Copy Desk's follower; works anywhere a Watch Card does")
 					.withStyle(ChatFormatting.GRAY));
 		}
 		String scope = stack.get(ModComponents.CARD_SCOPE);

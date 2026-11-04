@@ -10,7 +10,7 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-/** UNIT[XYZ] maths: metal in and out as spot balances or as longs, with withdrawals prorated by leverage. */
+/** Commodity Exchange maths: metal in and out as spot balances or as longs, with withdrawals prorated by leverage. */
 class PhysicalSettlementTest {
 	private static final String GOLD = "xyz:GOLD";
 	private static final String UGOLD = "UGOLD/USDC";

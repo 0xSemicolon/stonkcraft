@@ -571,8 +571,8 @@ public final class ServerNet {
 	/** {@code admin}: an op's /stonk mint, which works with the mint turned off and has no cap or cooldown. */
 	public static String mintPaper(ServerPlayer player, long usd, boolean admin) {
 		HyperConfig cfg = HyperConfig.get();
-		if (!cfg.paperFaucet && !admin) return "There's no free money here: bridge goods at a UNIT[XYZ] to fund an account";
-		if (dev.stonkcraft.game.Speedruns.active(player.getUUID()) != null) return "No paper mint during a speedrun: mine gold and bridge it at a UNIT[XYZ]";
+		if (!cfg.paperFaucet && !admin) return "There's no free money here: sell goods at a Commodity Exchange to fund an account";
+		if (dev.stonkcraft.game.Speedruns.active(player.getUUID()) != null) return "No paper mint during a speedrun: mine gold and deposit it at a Commodity Exchange";
 		if (!admin) usd = Math.min(usd, (long) cfg.paperFaucetUsd);
 		if (usd <= 0) return "Enter an amount";
 		long now = System.currentTimeMillis();

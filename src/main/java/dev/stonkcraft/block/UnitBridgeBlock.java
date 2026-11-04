@@ -27,7 +27,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
-/** UNIT[XYZ]: deposit metal (right-click with it; sneak for everything you carry), open empty-handed to withdraw. */
+/** Commodity Exchange: deposit metal (right-click with it; sneak for everything you carry), open empty-handed to withdraw. */
 public class UnitBridgeBlock extends HcBlock {
 	public static final MapCodec<UnitBridgeBlock> CODEC = simpleCodec(UnitBridgeBlock::new);
 

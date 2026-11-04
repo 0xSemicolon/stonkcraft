@@ -73,7 +73,7 @@ public class Stonkcraft implements ModInitializer {
 			dev.stonkcraft.unit.UnitConfig.load();
 			dev.stonkcraft.unit.UnitBridge.bindTags();
 			java.util.List<String> metals = dev.stonkcraft.unit.UnitConfig.get().addModMetals();
-			if (!metals.isEmpty()) LOG.info("UNIT[XYZ] also takes mod metals: {}", String.join(", ", metals));
+			if (!metals.isEmpty()) LOG.info("Commodity Exchange also takes mod metals: {}", String.join(", ", metals));
 			market.setUnits(dev.stonkcraft.unit.UnitConfig.get().markets());
 			market.start(cfg.marketPollMillis, cfg.websocket ? cfg.apiBase() : null);
 			accounts = new AccountRegistry(server, () -> market);

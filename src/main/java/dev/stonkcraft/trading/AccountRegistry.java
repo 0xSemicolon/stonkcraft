@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * All trading accounts on the server: simulated paper ledgers, and watch-only mirrors of Hyperliquid mainnet
- * addresses. Money enters and leaves paper accounts only as coins (and as metal at a UNIT[XYZ] bridge).
+ * addresses. Money enters and leaves paper accounts only as coins (and as metal at a Commodity Exchange).
  */
 public final class AccountRegistry implements GuardedAccount.Auditor {
 	private static final Gson GSON = new GsonBuilder().create();
@@ -100,8 +100,6 @@ public final class AccountRegistry implements GuardedAccount.Auditor {
 				register(a);
 			}
 			migrateLegacy();
-			Path keys = server.getWorldPath(LevelResource.ROOT).resolve("stonkcraft_delegated_keys.json");
-			if (Files.deleteIfExists(keys)) Stonkcraft.LOG.info("Deleted stonkcraft_delegated_keys.json: live trading was removed, so server-held keys have no use");
 		} catch (Exception e) {
 			Stonkcraft.LOG.error("Failed to load accounts", e);
 		}
@@ -459,7 +457,7 @@ public final class AccountRegistry implements GuardedAccount.Auditor {
 			if (grant > 0) {
 				p.sendSystemMessage(Component.literal("§b[Stonkcraft] §7Here's §f" + Fmt.usd(grant) + "§7 in paper money. Craft a §fTrading Terminal§7, open an account in its §fBuild§7 tab, then hit §f+ Fund§7 to deposit it."));
 			} else {
-				p.sendSystemMessage(Component.literal("§b[Stonkcraft] §7Money is earned here: craft an §fAccount Vault§7 and a §fUNIT[XYZ]§7, then bridge gold, iron, diamonds and more into your account at live prices. Trade at a §fTrading Terminal§7. Recipes are in your recipe book."));
+				p.sendSystemMessage(Component.literal("§b[Stonkcraft] §7Money is earned here: craft an §fAccount Vault§7 and a §fCommodity Exchange§7, then deposit gold, iron, diamonds and more into your account at live prices. Trade at a §fTrading Terminal§7. Recipes are in your recipe book."));
 			}
 			save();
 		}

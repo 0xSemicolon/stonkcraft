@@ -5,7 +5,7 @@
       "id": "minecraft:raw_gold"
     },
     "title": "Gold Rush",
-    "description": "Bridge mined gold into an account at a UNIT[XYZ]",
+    "description": "Deposit mined gold into an account at a Commodity Exchange",
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,

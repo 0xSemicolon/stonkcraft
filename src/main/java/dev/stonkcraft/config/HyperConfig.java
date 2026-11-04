@@ -25,7 +25,7 @@ public class HyperConfig {
 	 * get them free (the build menu has survival players craft them from what they carry).
 	 */
 	public boolean buildMenu = false;
-	/** Paper coins every player receives once, on first join. 0: money comes in through UNIT[XYZ], from goods. */
+	/** Paper coins every player receives once, on first join. 0: money comes in through Commodity Exchange, from goods. */
 	public double paperStarterGrant = 0;
 	/** Balance given to accounts migrated from the old one-account-per-player format. */
 	public double paperStartingBalance = 100_000;
@@ -99,7 +99,7 @@ public class HyperConfig {
 				instance._readme = new HyperConfig()._readme;
 				instance.upgrade();
 			}
-			// rewriting drops keys from older versions (network, liveTrading, privateKey, builder fees...)
+			// rewriting drops settings this version doesn't know
 			Files.writeString(path, GSON.toJson(instance));
 		} catch (IOException | RuntimeException e) {
 			Stonkcraft.LOG.error("Failed to load {}, using defaults", path, e);

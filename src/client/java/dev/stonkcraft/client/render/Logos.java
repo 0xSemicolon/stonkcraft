@@ -20,7 +20,8 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
 
 /**
- * 8-bit market logos (textures/logo/&lt;ticker&gt;.png, drawn by tools/textures/make_textures.py). Markets without a
+ * 8-bit market pictures (textures/logo/&lt;ticker&gt;.png, drawn by tools/textures/make_textures.py): generic ones only,
+ * for metals, energy and currencies. Markets without one
  * drawn logo get a badge in a colour derived from their ticker, lettered with its first characters, so every
  * coin, stock and commodity has a mark in lists, on the tape and on Ticker Display faces.
  */
@@ -29,17 +30,7 @@ public final class Logos {
 	private static final Map<String, ResourceLocation> FOUND = new ConcurrentHashMap<>();
 	private static final ResourceLocation NONE = Stonkcraft.id("none");
 
-	/** trade[xyz] markets whose logo is a plain picture, not a company's or fund's mark: metals, energy, currencies. */
-	private static final Set<String> GENERIC = Set.of("GOLD", "SILVER", "COPPER", "PLATINUM", "PALLADIUM", "CL", "BRENTOIL", "HO", "NATGAS", "EUR", "GBP", "JPY");
-
 	private Logos() {}
-
-	/** A trade[xyz] market (stocks, indices, ETFs). Their logos are opt-in via stockLogos in stonkcraft-client.json. */
-	private static boolean isStock(String market) {
-		if (market.startsWith("xyz:")) return true;
-		ClientState.Ticker t = ClientState.ticker(market);
-		return t != null && "xyz".equals(t.dex);
-	}
 
 	/** "xyz:GOLD" -> "GOLD", "HYPE/USDC" -> "HYPE", "kPEPE" -> "PEPE". */
 	public static String key(String market) {
@@ -52,7 +43,6 @@ public final class Logos {
 	@Nullable
 	public static ResourceLocation texture(String market) {
 		String k = key(market);
-		if (!ClientConfig.get().stockLogos && isStock(market) && !GENERIC.contains(k)) return null;
 		ResourceLocation r = FOUND.computeIfAbsent(k, kk -> {
 			ResourceLocation loc = Stonkcraft.id("textures/logo/" + kk.toLowerCase(Locale.ROOT) + ".png");
 			return Minecraft.getInstance().getResourceManager().getResource(loc).isPresent() ? loc : NONE;

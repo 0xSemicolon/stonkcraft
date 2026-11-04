@@ -719,7 +719,7 @@ public final class PaperAccount implements TradingAccount {
 		return true;
 	}
 
-	// ------------------------------------------------------------------ physical settlement (UNIT[XYZ])
+	// ------------------------------------------------------------------ physical settlement (Commodity Exchange)
 
 	/** Metal bridged in as a spot balance: {@code qty} of a Unit token worth {@code px} each. */
 	public void creditSpot(String market, double qty, double px) {

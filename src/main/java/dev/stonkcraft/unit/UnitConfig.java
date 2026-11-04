@@ -12,14 +12,14 @@ import java.util.Map;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Which items a UNIT[XYZ] bridge takes, at config/stonkcraft-unit.json. Each token is a Stonkcraft-only spot asset
+ * Which items a Commodity Exchange takes, at config/stonkcraft-exchange.json. Each token is a Stonkcraft-only spot asset
  * ("UGOLD") priced at a reference market's mid ("xyz:GOLD"); each item counts for some amount of the token, in the
  * token's unit (troy ounces of gold, pounds of copper). Server owners can add their own pegs.
  */
 public final class UnitConfig {
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
-	public String _readme = "Items a UNIT[XYZ] bridge accepts. Each token is priced at priceMarket's mid; items count for that many units. "
+	public String _readme = "Items a Commodity Exchange accepts. Each token is priced at priceMarket's mid; items count for that many units. "
 			+ "Raw metal and ore count for 90% of the refined amount. withdraw lists what comes out, largest first.";
 	/** Bridge fee in basis points, charged on deposits and on withdrawals. */
 	public int feeBps = 25;
@@ -266,7 +266,7 @@ public final class UnitConfig {
 	}
 
 	public static Path path() {
-		return net.fabricmc.loader.api.FabricLoader.getInstance().getConfigDir().resolve("stonkcraft-unit.json");
+		return net.fabricmc.loader.api.FabricLoader.getInstance().getConfigDir().resolve("stonkcraft-exchange.json");
 	}
 
 	public static void load() {

@@ -125,7 +125,7 @@ public final class UiTour {
 		ServerNet.placeOrder(p, "xyz:SILVER", dev.stonkcraft.trading.Side.SHORT, 8_000);
 		ServerNet.placeOrder(p, "AAPL", dev.stonkcraft.trading.Side.LONG, 5_000);
 		ServerNet.placeOrder(p, "UGOLD/USDC", dev.stonkcraft.trading.Side.BUY, 3_000);
-		// some iron and coal already bridged, so the UNIT[XYZ] shot has withdraw rows
+		// some iron and coal already bridged, so the Commodity Exchange shot has withdraw rows
 		var paper = reg.paper(acct.id);
 		dev.stonkcraft.unit.UnitBridge.deposit(paper, Stonkcraft.market(), "minecraft:iron_ingot", 20, dev.stonkcraft.unit.UnitBridge.Mode.SPOT);
 		dev.stonkcraft.unit.UnitBridge.deposit(paper, Stonkcraft.market(), "minecraft:coal_block", 4, dev.stonkcraft.unit.UnitBridge.Mode.SPOT);
@@ -378,7 +378,7 @@ public final class UiTour {
 				}));
 			}
 			if (BLOCKS[i].equals("unit_bridge")) {
-				// UNIT[XYZ] has no fold: its "more" shot is a deposit made from the screen, a lava bucket whose bucket comes back
+				// Commodity Exchange has no fold: its "more" shot is a deposit made from the screen, a lava bucket whose bucket comes back
 				steps.add(() -> server.execute(() -> player(server).getInventory().add(new ItemStack(net.minecraft.world.item.Items.LAVA_BUCKET))));
 				steps.add(() -> {
 					for (var c : mc.screen == null ? java.util.List.<net.minecraft.client.gui.components.events.GuiEventListener>of() : mc.screen.children()) {
@@ -444,7 +444,7 @@ public final class UiTour {
 		blockLinks(server);
 	}
 
-	/** Blocks that touch share an account: a row of vault, UNIT[XYZ] and terminal, then with a gap in it. */
+	/** Blocks that touch share an account: a row of vault, Commodity Exchange and terminal, then with a gap in it. */
 	private static void blockLinks(MinecraftServer server) {
 		BlockPos vaultAt = spot(0).above(8), unitAt = vaultAt.east(), terminalAt = unitAt.east();
 		java.util.UUID[] before = new java.util.UUID[1];
@@ -458,7 +458,7 @@ public final class UiTour {
 			level.setBlockAndUpdate(terminalAt, dev.stonkcraft.registry.ModBlocks.TERMINAL.defaultBlockState());
 			if (level.getBlockEntity(vaultAt) instanceof dev.stonkcraft.block.AccountVaultBlockEntity v) v.bind(reg.createPaper(p, "Linked"));
 			var unit = (dev.stonkcraft.block.UnitBridgeBlockEntity) level.getBlockEntity(unitAt);
-			Stonkcraft.LOG.info("UiTour: block links: UNIT[XYZ] acts on {} (selected {})", unit.target(p).name, reg.selected(p).name);
+			Stonkcraft.LOG.info("UiTour: block links: Commodity Exchange acts on {} (selected {})", unit.target(p).name, reg.selected(p).name);
 			var state = level.getBlockState(terminalAt);
 			((dev.stonkcraft.block.TerminalBlock) state.getBlock()).useWithoutItem(state, level, terminalAt, p, null);
 		}));

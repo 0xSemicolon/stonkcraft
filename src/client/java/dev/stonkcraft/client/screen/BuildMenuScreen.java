@@ -26,7 +26,7 @@ public class BuildMenuScreen extends HcScreen {
 
 	static final BuildItem[] BUILD_ITEMS = {
 			new BuildItem("account_vault", "Account Vault", "Holds an account. Deposit and withdraw coins."),
-			new BuildItem("unit_bridge", "UNIT[XYZ]", "Bridge ores, gems and fuel in, and back out."),
+			new BuildItem("unit_bridge", "Commodity Exchange", "Swap ores, gems and fuel for money, and back."),
 			new BuildItem("signal_mixer", "Signal Mixer", "Combine accounts and signals: blend, fade, filter, gate..."),
 			new BuildItem("copy_desk", "Copy Desk", "Copy a trader, an account or a signal into your account."),
 			new BuildItem("trading_terminal", "Trading Terminal", "Right-click to open this terminal."),

@@ -15,7 +15,7 @@ import net.minecraft.client.gui.GuiGraphics;
 public class WelcomeScreen extends HcScreen {
 	private static final String[][] STEPS = {
 			{"1", "Open an account", "Press H for the build menu: craft an Account Vault there from iron, gold, a chest and redstone, place it and open an account."},
-			{"2", "Fund it", "Money is earned: craft a UNIT[XYZ] and bridge gold, iron, diamonds, coal and more into the account at live prices."},
+			{"2", "Fund it", "Money is earned: craft a Commodity Exchange and deposit gold, iron, diamonds, coal and more into the account at live prices."},
 			{"3", "Trade", "Craft a Trading Terminal and right-click it to trade. Then build bots: a card links a Market Sensor and a "
 					+ "Trade Executor to your account, and redstone wires them."},
 	};

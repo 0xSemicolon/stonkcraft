@@ -18,7 +18,7 @@ class BlockLinksTest {
 
 	@Test
 	void aRowLinksThroughTheBlockBetween() {
-		// [ account block ] [ UNIT[XYZ] ] [ trading terminal ]
+		// [ account block ] [ Commodity Exchange ] [ trading terminal ]
 		assertEquals(0, search("VUT", 1));
 		assertEquals(0, search("VUT", 2));
 	}

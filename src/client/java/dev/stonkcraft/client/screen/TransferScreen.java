@@ -19,7 +19,7 @@ import net.minecraft.client.gui.screens.Screen;
 public class TransferScreen extends HcScreen {
 	private enum Way {
 		TO_SPOT("Perps → Spot", "Free perps USD, to buy spot with"),
-		TO_PERPS("Spot → Perps", "Spot USD, e.g. from selling bridged goods, to margin perps with"),
+		TO_PERPS("Spot → Perps", "Spot USD, e.g. from selling deposited goods, to margin perps with"),
 		TO_DEX("Perps → Stocks", "Free perps USD, to margin stocks and commodities with"),
 		FROM_DEX("Stocks → Perps", "Free stocks USD, back to the perps account");
 

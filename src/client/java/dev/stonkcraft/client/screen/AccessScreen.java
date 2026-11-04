@@ -257,7 +257,7 @@ public class AccessScreen extends HcScreen {
 		f.add(new HcButton(f.left + 186, y - 2, (f.width - 192) / 2, ROW, "Watch Card", b -> print("READ"))).tip("Read-only: for sensors, displays, mixers and copy-desk leaders");
 		f.add(new HcButton(f.left + 186 + (f.width - 192) / 2 + 6, y - 2, (f.width - 192) / 2, ROW, "Trade Card", b -> print("TRADE")))
 				.tip("For executors and copy desks");
-		f.text("Watch Cards only look: sensors, displays, mixers, copy-desk leaders. Trade Cards drive executors, kill switches, dials and UNIT[XYZ], but only in blocks owned by someone with trade access.", 0xFF4E6E6A);
+		f.text("Watch Cards only look: sensors, displays, mixers, copy-desk leaders. Trade Cards drive executors, kill switches, dials and Commodity Exchange, but only in blocks owned by someone with trade access.", 0xFF4E6E6A);
 	}
 
 	private void print(String level) {

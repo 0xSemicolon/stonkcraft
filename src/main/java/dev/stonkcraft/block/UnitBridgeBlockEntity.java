@@ -35,7 +35,7 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
 /**
- * UNIT[XYZ]: a bridge between metal and an account. Right-click with metal, gems, redstone or fuel to deposit it (sneak to deposit
+ * Commodity Exchange: a bridge between metal and an account. Right-click with metal, gems, redstone or fuel to deposit it (sneak to deposit
  * all you carry), empty-handed to open its screen and withdraw. Acts on the inserted card's account, else the
  * player's selected one. Hoppers feed the card's account. The comparator pulses 15 on a deposit, 8 on a withdrawal.
  */
@@ -103,12 +103,12 @@ public class UnitBridgeBlockEntity extends HcBlockEntity {
 	public String labelTop() {
 		ModComponents.AccountRef ref = cardRef();
 		AccountVaultBlockEntity vault = ref == null ? BlockLinks.vault(level, worldPosition) : null;
-		return "UNIT[XYZ] · " + mode.label + (ref != null ? " · " + ref.name() : vault != null ? " · " + vault.displayName : "");
+		return "Commodity Exchange · " + mode.label + (ref != null ? " · " + ref.name() : vault != null ? " · " + vault.displayName : "");
 	}
 
 	@Override
 	public String labelBottom() {
-		return prices.isEmpty() ? "bridge goods for their live price" : prices;
+		return prices.isEmpty() ? "goods for their live price" : prices;
 	}
 
 	@Override
@@ -183,7 +183,7 @@ public class UnitBridgeBlockEntity extends HcBlockEntity {
 		if (taken.isEmpty()) {
 			UnitConfig.Token t = token == null ? null : UnitConfig.get().token(token);
 			if (t != null) result(player, false, "You carry no " + UnitConfig.name(t));
-			else player.displayClientMessage(Component.literal("§7Nothing to bridge: right-click the UNIT[XYZ] empty-handed to see what it takes"), true);
+			else player.displayClientMessage(Component.literal("§7Nothing to deposit: right-click the Commodity Exchange empty-handed to see what it takes"), true);
 			return;
 		}
 		double usd = 0;
@@ -200,10 +200,10 @@ public class UnitBridgeBlockEntity extends HcBlockEntity {
 			if (rest != null) giveBack(player, rest, e.getValue());
 			usd += r.usd();
 			last = "§a" + r.message();
-			a.log(player.getGameProfile().getName(), "unit.xyz", r.message(), true);
+			a.log(player.getGameProfile().getName(), "exchange", r.message(), true);
 		}
 		reg.save();
-		String msg = taken.size() > 1 && usd > 0 ? "§aBridged " + Fmt.usd(usd) + " into " + a.name : last;
+		String msg = taken.size() > 1 && usd > 0 ? "§aDeposited " + Fmt.usd(usd) + " into " + a.name : last;
 		player.displayClientMessage(Component.literal(msg), true);
 		if (token != null) result(player, usd > 0, msg.substring(2));
 		if (usd > 0) {
@@ -352,7 +352,7 @@ public class UnitBridgeBlockEntity extends HcBlockEntity {
 				UnitBridge.Result r = UnitBridge.deposit(p, Stonkcraft.market(), e.getKey(), e.getValue(), mode);
 				if (r.ok()) {
 					any = true;
-					a.log(ownerName.isEmpty() ? "hopper" : ownerName, "UNIT[XYZ] hopper @ " + worldPosition.toShortString(), r.message(), true);
+					a.log(ownerName.isEmpty() ? "hopper" : ownerName, "Commodity Exchange hopper @ " + worldPosition.toShortString(), r.message(), true);
 				}
 			}
 			if (any) {

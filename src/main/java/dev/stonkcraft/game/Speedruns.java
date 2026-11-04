@@ -24,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * Wall Street speedruns: {@code /stonk speedrun start} times a run from now to the Ender Dragon's death. While a run is
- * on, the paper mint is closed to that player, so the money has to come from the ground (UNIT[XYZ]) and from trading.
+ * on, the paper mint is closed to that player, so the money has to come from the ground (Commodity Exchange) and from trading.
  */
 public final class Speedruns {
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
@@ -36,7 +36,7 @@ public final class Speedruns {
 		public double startNetWorth;
 		public double endNetWorth;
 		public long end;
-		/** Value bridged in and out at UNIT[XYZ] blocks during the run. */
+		/** Value bridged in and out at Commodity Exchanges during the run. */
 		public double bridgedIn, bridgedOut;
 	}
 
@@ -101,7 +101,7 @@ public final class Speedruns {
 		r.startNetWorth = netWorth(p.getUUID());
 		saved.active.put(p.getUUID().toString(), r);
 		save();
-		return "§6Speedrun started§7: mine, bridge, trade, cash out, beat the dragon. The paper mint is closed to you until it ends. Net worth now §f"
+		return "§6Speedrun started§7: mine, deposit, trade, cash out, beat the dragon. The paper mint is closed to you until it ends. Net worth now §f"
 				+ Fmt.usd(r.startNetWorth);
 	}
 
@@ -133,7 +133,7 @@ public final class Speedruns {
 			save();
 			double pnl = r.endNetWorth - r.startNetWorth - r.bridgedIn + r.bridgedOut;
 			server.getPlayerList().broadcastSystemMessage(Component.literal("§6[Wall Street Speedrun] §f" + r.name + "§7 beat the dragon in §f" + clock(r.end - r.start)
-					+ "§7 · bridged in §f" + Fmt.usd(r.bridgedIn) + "§7, out §f" + Fmt.usd(r.bridgedOut) + "§7 · trading PnL " + (pnl >= 0 ? "§a" : "§c") + Fmt.usdSigned(pnl)), false);
+					+ "§7 · deposited §f" + Fmt.usd(r.bridgedIn) + "§7, withdrawn §f" + Fmt.usd(r.bridgedOut) + "§7 · trading PnL " + (pnl >= 0 ? "§a" : "§c") + Fmt.usdSigned(pnl)), false);
 			Advancements.award(p, "wall_street_speedrun");
 		}
 	}

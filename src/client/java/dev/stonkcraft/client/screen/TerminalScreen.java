@@ -496,7 +496,7 @@ public class TerminalScreen extends Screen {
 			tx += (int) (font.width(pxS) * ts) + 8;
 			double ch = t.dayChangePct();
 			if (showCh) Ui.text(g, font, chS, tx, y + 9, Ui.signColor(ch));
-			String info = "unit".equals(t.dex) ? "Backed by metal bridged at a UNIT[XYZ], priced at " + ClientState.display(t.apiCoin)
+			String info = "unit".equals(t.dex) ? "Backed by goods deposited at a Commodity Exchange, priced at " + ClientState.display(t.apiCoin)
 					: t.spot ? String.format(Locale.ROOT, "Spot · 24h Vol %s", Fmt.usdCompact(t.volume))
 					: String.format(Locale.ROOT, "%sFunding %.1f%% APR in %s · Mark %s · Oracle %s · 24h Vol %s · %dx", "",
 							t.fundingApr(), fundingCountdown(), Fmt.price(t.mark), Fmt.price(t.oracle), Fmt.usdCompact(t.volume), t.maxLeverage);
@@ -860,7 +860,7 @@ public class TerminalScreen extends Screen {
 			rows.add(new String[]{"Perps equity", Fmt.usd(num(pf, "perpEquity", 0))});
 			rows.add(new String[]{"Spot equity", Fmt.usd(num(pf, "spotEquity", 0))});
 			if (pf.has("dexes")) for (var e : pf.getAsJsonObject("dexes").entrySet()) {
-				rows.add(new String[]{"· on " + e.getKey(), Fmt.usd(e.getValue().getAsJsonObject().get("usdc").getAsDouble())});
+				rows.add(new String[]{"· on " + Fmt.pool(e.getKey()), Fmt.usd(e.getValue().getAsJsonObject().get("usdc").getAsDouble())});
 			}
 		}
 		JsonObject fee = pf.has("feeInfo") ? pf.getAsJsonObject("feeInfo") : null;
