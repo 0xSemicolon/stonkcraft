@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "hypercraft:block/leverage_dial_top",
+    "bottom": "hypercraft:block/casing",
+    "side": "hypercraft:block/leverage_dial"
+  }
+}

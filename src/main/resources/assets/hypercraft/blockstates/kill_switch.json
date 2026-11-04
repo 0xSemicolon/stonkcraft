@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "triggered=false": {
+      "model": "hypercraft:block/kill_switch"
+    },
+    "triggered=true": {
+      "model": "hypercraft:block/kill_switch_on"
+    }
+  }
+}

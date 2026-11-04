@@ -1,0 +1,19 @@
+{
+  "parent": "hypercraft:copycat",
+  "display": {
+    "icon": {
+      "id": "hypercraft:signal_mixer"
+    },
+    "title": "Signal Processing",
+    "description": "Build a signal out of another signal",
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

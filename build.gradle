@@ -1,0 +1,147 @@
+plugins {
+	id 'net.fabricmc.fabric-loom-remap' version "${loom_version}"
+}
+
+base {
+	archivesName = project.archives_base_name
+}
+
+repositories {
+	mavenCentral()
+}
+
+loom {
+	splitEnvironmentSourceSets()
+
+	mods {
+		"hypercraft" {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
+	}
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings loom.officialMojangMappings()
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
+
+	testImplementation "org.junit.jupiter:junit-jupiter:5.11.3"
+	testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+}
+
+test {
+	useJUnitPlatform()
+}
+
+processResources {
+	def version = project.version
+	inputs.property "version", version
+
+	filesMatching("fabric.mod.json") {
+		expand "version": version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 21
+	it.options.encoding = "UTF-8"
+}
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
+}
+
+// ./gradlew runClient -Pdemo  -> auto-builds a showcase floor and screenshots it (dev only)
+if (project.hasProperty("demo")) {
+	loom.runs.client {
+		vmArg "-Dhypercraft.demo=true"
+		programArgs "--quickPlaySingleplayer", "hcdemo", "--width", "1280", "--height", "720"
+	}
+}
+
+// ./gradlew runClient -Pplay  -> jump straight into the showcase world (no auto-quit)
+if (project.hasProperty("play")) {
+	loom.runs.client {
+		programArgs "--quickPlaySingleplayer", "hc", "--width", "1280", "--height", "720"
+	}
+}
+
+// ./gradlew runClient -Pshowroom  -> a small flat world for the dev drivers: -Puitour opens every screen and screenshots it,
+//   -Pshots puts every block and market logo on a wall and screenshots that. -Prebuild starts the world over.
+// ./gradlew runClient -Psurvival  -> the survival world (run/saves/nyse-survival; a fresh one from the template if it's missing).
+["showroom": "showroom", "survival": "nyse-survival"].each { flag, name ->
+	if (project.hasProperty(flag)) {
+		def save = file("run/saves/" + name)
+		def template = file("worlds/" + name)
+		def rebuild = project.hasProperty("rebuild")
+		tasks.register("devWorld") {
+			doLast {
+				if (rebuild) save.deleteDir()
+				if (!new File(save, "level.dat").exists()) {
+					save.mkdirs()
+					java.nio.file.Files.copy(new File(template, "level.dat").toPath(), new File(save, "level.dat").toPath())
+				}
+			}
+		}
+		tasks.named("runClient") { dependsOn "devWorld" }
+		loom.runs.client {
+			vmArg "-Dhypercraft.showroom=" + (flag == "showroom")
+			// always pass every flag: Loom keeps run settings between launches
+			vmArg "-Dhypercraft.showroom.shots=" + project.hasProperty("shots")
+			vmArg "-Dhypercraft.uitour=" + project.hasProperty("uitour")
+			vmArg "-Dhypercraft.uitour.scale=" + (project.hasProperty("uiscale") ? project.property("uiscale") : "0")
+			// the tour only opens screens: a small heap keeps it from being killed on a busy machine
+			vmArg "-Xmx" + (project.hasProperty("uitour") ? "1536M" : "4G")
+			programArgs "--quickPlaySingleplayer", name, "--width", "1280", "--height", "720"
+		}
+	}
+}
+
+// -Pcompat: run with the mods most players have next to HyperCraft (Sodium, Lithium, Mod Menu; Iris only loads in a real launcher, its refmap fails under dev mappings), from Modrinth's maven.
+if (project.hasProperty("compat")) {
+	repositories {
+		exclusiveContent {
+			forRepository { maven { url = "https://api.modrinth.com/maven" } }
+			filter { includeGroup "maven.modrinth" }
+		}
+	}
+	dependencies {
+		modLocalRuntime "maven.modrinth:sodium:mc1.21.1-0.8.13-fabric"
+		modLocalRuntime "maven.modrinth:lithium:mc1.21.1-0.15.4-fabric"
+		modLocalRuntime "maven.modrinth:modmenu:11.0.5"
+	}
+}
+
+// ./gradlew runClient -Pworld=<save name>  -> straight into any world in run/saves
+if (project.hasProperty("world")) {
+	loom.runs.client {
+		programArgs "--quickPlaySingleplayer", project.property("world").toString(), "--width", "1280", "--height", "720"
+	}
+}
+
+// -Pjoin[=host:port]: join the dev server (./gradlew runServer, port from run/server.properties) instead of a single-player world. -Pwelcomeshot: screenshot the
+// welcome screen once it's up, then quit.
+if (project.hasProperty("join")) {
+	loom.runs.client {
+		def props = new Properties(); def sp = file("run/server.properties"); if (sp.exists()) sp.withInputStream { props.load(it) }
+		def target = project.property("join").toString().contains(":") ? project.property("join").toString() : "localhost:" + props.getProperty("server-port", "25565")
+		programArgs "--quickPlayMultiplayer", target, "--width", "1280", "--height", "720"
+	}
+}
+loom.runs.client {
+	vmArg "-Dhypercraft.welcomeShot=" + project.hasProperty("welcomeshot")
+}
+
+// Dev clients get a random name unless told otherwise, and an offline player's UUID comes from the name, so every launch was a
+// stranger to the accounts and blocks in the save. Playing keeps one name (-Pplayer=<name> for another, such as a second client
+// on -Pjoin). Player0 is the identity that owns what's in nyse-survival. Automated runs stay throwaway so they can't touch it.
+def automatedRun = ["demo", "uitour", "shots", "welcomeshot"].any { project.hasProperty(it) }
+if (project.hasProperty("player") || !automatedRun) {
+	loom.runs.client {
+		programArgs "--username", (project.findProperty("player") ?: "Player0").toString()
+	}
+}

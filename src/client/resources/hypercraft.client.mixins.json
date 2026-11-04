@@ -1,0 +1,9 @@
+{
+	"required": true,
+	"package": "dev.hypercraft.client.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"client": ["GuiGraphicsMixin", "MouseHandlerAccessor"],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

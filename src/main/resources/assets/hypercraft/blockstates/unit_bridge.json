@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "hypercraft:block/unit_bridge",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "hypercraft:block/unit_bridge",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "hypercraft:block/unit_bridge",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "hypercraft:block/unit_bridge",
+      "y": 270
+    }
+  }
+}

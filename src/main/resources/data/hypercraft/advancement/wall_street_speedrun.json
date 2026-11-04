@@ -1,0 +1,19 @@
+{
+  "parent": "hypercraft:cash_out",
+  "display": {
+    "icon": {
+      "id": "minecraft:dragon_egg"
+    },
+    "title": "Wall Street Speedrun",
+    "description": "Beat the Ender Dragon on a /hl speedrun",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

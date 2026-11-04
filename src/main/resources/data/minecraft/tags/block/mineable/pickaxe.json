@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "hypercraft:trading_terminal",
+    "hypercraft:ticker_display",
+    "hypercraft:market_sensor",
+    "hypercraft:trade_executor",
+    "hypercraft:account_vault",
+    "hypercraft:kill_switch",
+    "hypercraft:leverage_dial",
+    "hypercraft:account_display",
+    "hypercraft:unit_bridge",
+    "hypercraft:signal_mixer",
+    "hypercraft:copy_desk"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+	"schemaVersion": 1,
+	"id": "hypercraft",
+	"version": "${version}",
+	"name": "Stonkcraft",
+	"description": "Paper-trade live Hyperliquid and trade.xyz markets from inside Minecraft, and build the trading bots out of redstone. Paper money only: no keys, no real orders. Fan-made; not affiliated with Hyperliquid, trade.xyz or the NYSE.",
+	"authors": ["semicolon"],
+	"contact": {
+		"homepage": "https://modrinth.com/mod/stonkcraft"
+	},
+	"license": "MIT",
+	"icon": "assets/hypercraft/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": ["dev.hypercraft.HyperCraft"],
+		"client": ["dev.hypercraft.client.HyperCraftClient"]
+	},
+	"mixins": [{ "config": "hypercraft.client.mixins.json", "environment": "client" }],
+	"depends": {
+		"fabricloader": ">=0.16.0",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"modmenu": "*"
+	}
+}

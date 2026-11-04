@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "triggered=false": {
+      "model": "hypercraft:block/trade_executor"
+    },
+    "triggered=true": {
+      "model": "hypercraft:block/trade_executor_on"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "parent": "hypercraft:gold_rush",
+  "display": {
+    "icon": {
+      "id": "minecraft:gold_block"
+    },
+    "title": "Cash Out",
+    "description": "Withdraw metal from an account at a UNIT.XYZ",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "power=0": {
+      "model": "hypercraft:block/market_sensor"
+    },
+    "power=1": {
+      "model": "hypercraft:block/market_sensor_on"
+    },
+    "power=2": {
+      "model": "hypercraft:block/market_sensor_on"
+    },
+    "power=3": {
+      "model": "hypercraft:block/market_sensor_on"
+    },
+    "power=4": {
+      "model": "hypercraft:block/market_sensor_on"
+    },
+    "power=5": {
+      "model": "hypercraft:block/market_sensor_on"
+    },
+    "power=6": {
+      "model": "hypercraft:block/market_sensor_on"
+    },
+    "power=7": {
+      "model": "hypercraft:block/market_sensor_on"
+    },
+    "power=8": {
+      "model": "hypercraft:block/market_sensor_on"
+    },
+    "power=9": {
+      "model": "hypercraft:block/market_sensor_on"
+    },
+    "power=10": {
+      "model": "hypercraft:block/market_sensor_on"
+    },
+    "power=11": {
+      "model": "hypercraft:block/market_sensor_on"
+    },
+    "power=12": {
+      "model": "hypercraft:block/market_sensor_on"
+    },
+    "power=13": {
+      "model": "hypercraft:block/market_sensor_on"
+    },
+    "power=14": {
+      "model": "hypercraft:block/market_sensor_on"
+    },
+    "power=15": {
+      "model": "hypercraft:block/market_sensor_on"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "hypercraft:block/copy_desk",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "hypercraft:block/copy_desk",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "hypercraft:block/copy_desk",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "hypercraft:block/copy_desk",
+      "y": 270
+    }
+  }
+}

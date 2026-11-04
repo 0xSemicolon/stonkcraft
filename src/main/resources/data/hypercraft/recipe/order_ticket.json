@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    { "item": "minecraft:paper" },
+    { "item": "minecraft:paper" },
+    { "item": "minecraft:redstone" }
+  ],
+  "result": {
+    "id": "hypercraft:order_ticket",
+    "count": 2
+  }
+}

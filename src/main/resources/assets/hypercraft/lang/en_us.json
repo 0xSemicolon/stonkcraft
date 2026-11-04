@@ -1,0 +1,25 @@
+{
+  "itemGroup.hypercraft": "Stonkcraft",
+  "block.hypercraft.trading_terminal": "Trading Terminal",
+  "block.hypercraft.ticker_display": "Ticker Display",
+  "block.hypercraft.market_sensor": "Market Sensor",
+  "block.hypercraft.trade_executor": "Trade Executor",
+  "key.categories.hypercraft": "Stonkcraft",
+
+  "key.hypercraft.tape": "Toggle Ticker Tape",
+  "key.hypercraft.build": "Build Menu",
+  "block.hypercraft.account_vault": "Account Vault",
+  "item.hypercraft.usdc_chip": "$1 Chip",
+  "item.hypercraft.usdc_note": "$100 Note",
+  "item.hypercraft.usdc_bar": "$10,000 Bar",
+  "item.hypercraft.account_card": "Blank Card",
+  "item.hypercraft.watch_card": "Watch Card",
+  "block.hypercraft.kill_switch": "Kill Switch",
+  "block.hypercraft.leverage_dial": "Leverage Dial",
+  "block.hypercraft.account_display": "Account Display",
+  "block.hypercraft.unit_bridge": "UNIT.XYZ",
+  "block.hypercraft.signal_mixer": "Signal Mixer",
+  "block.hypercraft.copy_desk": "Copy Desk",
+  "item.hypercraft.signal_card": "Signal Card",
+  "item.hypercraft.order_ticket": "Blank Order Ticket"
+}

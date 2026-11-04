@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "hypercraft:block/signal_mixer"
+    }
+  }
+}

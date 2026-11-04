@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "hypercraft:block/mixer_top",
+    "side": "hypercraft:block/mixer_side"
+  }
+}

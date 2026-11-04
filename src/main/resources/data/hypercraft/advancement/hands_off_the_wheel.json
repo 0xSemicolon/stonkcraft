@@ -1,0 +1,19 @@
+{
+  "parent": "hypercraft:first_fill",
+  "display": {
+    "icon": {
+      "id": "hypercraft:trade_executor"
+    },
+    "title": "Hands Off the Wheel",
+    "description": "Have a Trade Executor trade for you",
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}
