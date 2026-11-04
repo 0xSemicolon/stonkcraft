@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "stonkcraft:block/kill_switch_top",
+    "bottom": "stonkcraft:block/casing",
+    "side": "stonkcraft:block/kill_switch"
+  }
+}

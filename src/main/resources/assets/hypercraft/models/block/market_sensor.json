@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "top": "hypercraft:block/sensor_top",
-    "bottom": "hypercraft:block/casing",
-    "side": "hypercraft:block/sensor_side"
-  }
-}

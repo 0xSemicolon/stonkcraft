@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "stonkcraft:block/unit_top",
+    "front": "stonkcraft:block/unit_front",
+    "side": "stonkcraft:block/unit_side"
+  }
+}

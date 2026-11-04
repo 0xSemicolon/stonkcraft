@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "stonkcraft:block/unit_bridge",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "stonkcraft:block/unit_bridge",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "stonkcraft:block/unit_bridge",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "stonkcraft:block/unit_bridge",
+      "y": 270
+    }
+  }
+}

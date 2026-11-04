@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "stonkcraft:block/leverage_dial_top",
+    "bottom": "stonkcraft:block/casing",
+    "side": "stonkcraft:block/leverage_dial_high"
+  }
+}

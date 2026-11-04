@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/orientable",
-  "textures": {
-    "top": "hypercraft:block/unit_top",
-    "front": "hypercraft:block/unit_front",
-    "side": "hypercraft:block/unit_side"
-  }
-}

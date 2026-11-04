@@ -1,0 +1,19 @@
+{
+  "parent": "stonkcraft:open_for_business",
+  "display": {
+    "icon": {
+      "id": "stonkcraft:trade_executor"
+    },
+    "title": "First Fill",
+    "description": "Get an order filled",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

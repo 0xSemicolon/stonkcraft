@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "power=0": {
+      "model": "stonkcraft:block/market_sensor"
+    },
+    "power=1": {
+      "model": "stonkcraft:block/market_sensor_on"
+    },
+    "power=2": {
+      "model": "stonkcraft:block/market_sensor_on"
+    },
+    "power=3": {
+      "model": "stonkcraft:block/market_sensor_on"
+    },
+    "power=4": {
+      "model": "stonkcraft:block/market_sensor_on"
+    },
+    "power=5": {
+      "model": "stonkcraft:block/market_sensor_on"
+    },
+    "power=6": {
+      "model": "stonkcraft:block/market_sensor_on"
+    },
+    "power=7": {
+      "model": "stonkcraft:block/market_sensor_on"
+    },
+    "power=8": {
+      "model": "stonkcraft:block/market_sensor_on"
+    },
+    "power=9": {
+      "model": "stonkcraft:block/market_sensor_on"
+    },
+    "power=10": {
+      "model": "stonkcraft:block/market_sensor_on"
+    },
+    "power=11": {
+      "model": "stonkcraft:block/market_sensor_on"
+    },
+    "power=12": {
+      "model": "stonkcraft:block/market_sensor_on"
+    },
+    "power=13": {
+      "model": "stonkcraft:block/market_sensor_on"
+    },
+    "power=14": {
+      "model": "stonkcraft:block/market_sensor_on"
+    },
+    "power=15": {
+      "model": "stonkcraft:block/market_sensor_on"
+    }
+  }
+}

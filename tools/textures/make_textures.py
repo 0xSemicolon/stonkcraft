@@ -1,8 +1,8 @@
 """
-HyperCraft's 8-bit art: every block and item texture, and the market logos, drawn in code so they share one
+Stonkcraft's 8-bit art: every block and item texture, and the market logos, drawn in code so they share one
 palette and one material language (bevelled graphite, gold trim, lit glass).
 
-    python tools/textures/make_textures.py            # writes into src/main/resources/assets/hypercraft/textures
+    python tools/textures/make_textures.py            # writes into src/main/resources/assets/stonkcraft/textures
     python tools/textures/make_textures.py --sheet out.png   # also a contact sheet for review
 """
 import math
@@ -11,7 +11,7 @@ import sys
 
 from PIL import Image
 
-ROOT = os.path.join(os.path.dirname(__file__), '..', '..', 'src', 'main', 'resources', 'assets', 'hypercraft', 'textures')
+ROOT = os.path.join(os.path.dirname(__file__), '..', '..', 'src', 'main', 'resources', 'assets', 'stonkcraft', 'textures')
 
 
 def hexc(h, a=255):
@@ -159,7 +159,7 @@ def graphite(cv, x1=0, y1=0, x2=15, y2=15, base=GRAPHITE):
 
 
 def gold_corners(cv, inset=1, length=3):
-    """Gold L-brackets in each corner: the HyperCraft trim."""
+    """Gold L-brackets in each corner: the Stonkcraft trim."""
     n = cv.w - 1 - inset
     for i in range(length):
         for (x, y) in [(inset + i, inset), (inset, inset + i), (n - i, inset), (n, inset + i),
@@ -199,7 +199,7 @@ def standard_side(name, extra=None):
     return cv
 
 
-# ---------------------------------------------------------------- the HyperCraft mark
+# ---------------------------------------------------------------- the Stonkcraft mark
 
 MARK = ['..#..', '.###.', '##.##', '.###.', '..#..']
 
@@ -218,7 +218,7 @@ def blocks():
     rivets(cv, [(3, 7), (11, 7)])
     out['block/casing'] = cv.save('block/casing.png')
 
-    # trading terminal: a candlestick chart over the HyperCraft mark
+    # trading terminal: a candlestick chart over the Stonkcraft mark
     cv = Canvas()
     graphite(cv)
     screen(cv, 1, 1, 14, 11)
@@ -374,7 +374,7 @@ def blocks():
     cv = standard_side('vault_top', lambda c: (c.rect(3, 6, 12, 9, GOLD_LO), c.rect(3, 6, 12, 8, GOLD), c.rect(4, 6, 11, 6, GOLD_HI)))
     out['block/vault_top'] = cv.save('block/vault_top.png')
 
-    # UNIT.XYZ: a gold bar and a copper bar behind glass, the UNIT mark above
+    # UNIT[XYZ]: a gold bar and a copper bar behind glass, the UNIT mark above
     copper, copper_hi, copper_lo = hexc('#d9844a'), hexc('#f5b98a'), hexc('#8a4a22')
     small = {'U': ['#.#', '#.#', '#.#', '#.#', '###'], 'N': ['##.', '#.#', '#.#', '#.#', '#.#'], 'I': ['###', '.#.', '.#.', '.#.', '###'],
              'T': ['###', '.#.', '.#.', '.#.', '.#.'], 'X': ['#.#', '#.#', '.#.', '#.#', '#.#'], 'Y': ['#.#', '#.#', '.#.', '.#.', '.#.'],
@@ -524,7 +524,7 @@ def items():
 
 
 # ---------------------------------------------------------------- market logos
-# Only markets that trade on Hyperliquid or trade.xyz get a logo; delisted ones (DXY, VIX, NIFTY, IBOV, SNAP, TON, TTF, TTWO) don't.
+# Only markets that trade on Hyperliquid or trade[xyz] get a logo; delisted ones (DXY, VIX, NIFTY, IBOV, SNAP, TON, TTF, TTWO) don't.
 
 def badge(c, ring=None):
     cv = Canvas()

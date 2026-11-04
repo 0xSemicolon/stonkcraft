@@ -1,0 +1,25 @@
+{
+  "itemGroup.stonkcraft": "Stonkcraft",
+  "block.stonkcraft.trading_terminal": "Trading Terminal",
+  "block.stonkcraft.ticker_display": "Ticker Display",
+  "block.stonkcraft.market_sensor": "Market Sensor",
+  "block.stonkcraft.trade_executor": "Trade Executor",
+  "key.categories.stonkcraft": "Stonkcraft",
+
+  "key.stonkcraft.tape": "Toggle Ticker Tape",
+  "key.stonkcraft.build": "Build Menu",
+  "block.stonkcraft.account_vault": "Account Vault",
+  "item.stonkcraft.usdc_chip": "$1 Chip",
+  "item.stonkcraft.usdc_note": "$100 Note",
+  "item.stonkcraft.usdc_bar": "$10,000 Bar",
+  "item.stonkcraft.account_card": "Blank Card",
+  "item.stonkcraft.watch_card": "Watch Card",
+  "block.stonkcraft.kill_switch": "Kill Switch",
+  "block.stonkcraft.leverage_dial": "Leverage Dial",
+  "block.stonkcraft.account_display": "Account Display",
+  "block.stonkcraft.unit_bridge": "UNIT[XYZ]",
+  "block.stonkcraft.signal_mixer": "Signal Mixer",
+  "block.stonkcraft.copy_desk": "Copy Desk",
+  "item.stonkcraft.signal_card": "Signal Card",
+  "item.stonkcraft.order_ticket": "Blank Order Ticket"
+}

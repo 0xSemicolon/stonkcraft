@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "GMG",
+    "PEP",
+    "III"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass_pane"
+    },
+    "M": {
+      "item": "stonkcraft:signal_mixer"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "E": {
+      "item": "stonkcraft:trade_executor"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "id": "stonkcraft:copy_desk",
+    "count": 1
+  }
+}

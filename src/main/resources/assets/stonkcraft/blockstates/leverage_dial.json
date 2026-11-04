@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "power=0": {
+      "model": "stonkcraft:block/leverage_dial"
+    },
+    "power=1": {
+      "model": "stonkcraft:block/leverage_dial"
+    },
+    "power=2": {
+      "model": "stonkcraft:block/leverage_dial"
+    },
+    "power=3": {
+      "model": "stonkcraft:block/leverage_dial"
+    },
+    "power=4": {
+      "model": "stonkcraft:block/leverage_dial"
+    },
+    "power=5": {
+      "model": "stonkcraft:block/leverage_dial"
+    },
+    "power=6": {
+      "model": "stonkcraft:block/leverage_dial_mid"
+    },
+    "power=7": {
+      "model": "stonkcraft:block/leverage_dial_mid"
+    },
+    "power=8": {
+      "model": "stonkcraft:block/leverage_dial_mid"
+    },
+    "power=9": {
+      "model": "stonkcraft:block/leverage_dial_mid"
+    },
+    "power=10": {
+      "model": "stonkcraft:block/leverage_dial_mid"
+    },
+    "power=11": {
+      "model": "stonkcraft:block/leverage_dial_high"
+    },
+    "power=12": {
+      "model": "stonkcraft:block/leverage_dial_high"
+    },
+    "power=13": {
+      "model": "stonkcraft:block/leverage_dial_high"
+    },
+    "power=14": {
+      "model": "stonkcraft:block/leverage_dial_high"
+    },
+    "power=15": {
+      "model": "stonkcraft:block/leverage_dial_high"
+    }
+  }
+}

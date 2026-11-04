@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "stonkcraft:block/mixer_top",
+    "side": "stonkcraft:block/mixer_side"
+  }
+}

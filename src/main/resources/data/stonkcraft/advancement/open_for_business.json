@@ -1,0 +1,19 @@
+{
+  "parent": "stonkcraft:root",
+  "display": {
+    "icon": {
+      "id": "stonkcraft:account_vault"
+    },
+    "title": "Open for Business",
+    "description": "Open a paper account",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

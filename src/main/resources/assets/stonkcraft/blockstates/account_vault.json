@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "stonkcraft:block/account_vault",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "stonkcraft:block/account_vault",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "stonkcraft:block/account_vault",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "stonkcraft:block/account_vault",
+      "y": 270
+    }
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/orientable",
-  "textures": {
-    "top": "hypercraft:block/ticker_side",
-    "front": "hypercraft:block/account_display_front",
-    "side": "hypercraft:block/ticker_side"
-  }
-}

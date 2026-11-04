@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "top": "hypercraft:block/kill_switch_top",
-    "bottom": "hypercraft:block/casing",
-    "side": "hypercraft:block/kill_switch"
-  }
-}

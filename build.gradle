@@ -14,7 +14,7 @@ loom {
 	splitEnvironmentSourceSets()
 
 	mods {
-		"hypercraft" {
+		"stonkcraft" {
 			sourceSet sourceSets.main
 			sourceSet sourceSets.client
 		}
@@ -58,7 +58,7 @@ java {
 // ./gradlew runClient -Pdemo  -> auto-builds a showcase floor and screenshots it (dev only)
 if (project.hasProperty("demo")) {
 	loom.runs.client {
-		vmArg "-Dhypercraft.demo=true"
+		vmArg "-Dstonkcraft.demo=true"
 		programArgs "--quickPlaySingleplayer", "hcdemo", "--width", "1280", "--height", "720"
 	}
 }
@@ -89,11 +89,11 @@ if (project.hasProperty("play")) {
 		}
 		tasks.named("runClient") { dependsOn "devWorld" }
 		loom.runs.client {
-			vmArg "-Dhypercraft.showroom=" + (flag == "showroom")
+			vmArg "-Dstonkcraft.showroom=" + (flag == "showroom")
 			// always pass every flag: Loom keeps run settings between launches
-			vmArg "-Dhypercraft.showroom.shots=" + project.hasProperty("shots")
-			vmArg "-Dhypercraft.uitour=" + project.hasProperty("uitour")
-			vmArg "-Dhypercraft.uitour.scale=" + (project.hasProperty("uiscale") ? project.property("uiscale") : "0")
+			vmArg "-Dstonkcraft.showroom.shots=" + project.hasProperty("shots")
+			vmArg "-Dstonkcraft.uitour=" + project.hasProperty("uitour")
+			vmArg "-Dstonkcraft.uitour.scale=" + (project.hasProperty("uiscale") ? project.property("uiscale") : "0")
 			// the tour only opens screens: a small heap keeps it from being killed on a busy machine
 			vmArg "-Xmx" + (project.hasProperty("uitour") ? "1536M" : "4G")
 			programArgs "--quickPlaySingleplayer", name, "--width", "1280", "--height", "720"
@@ -101,7 +101,7 @@ if (project.hasProperty("play")) {
 	}
 }
 
-// -Pcompat: run with the mods most players have next to HyperCraft (Sodium, Lithium, Mod Menu; Iris only loads in a real launcher, its refmap fails under dev mappings), from Modrinth's maven.
+// -Pcompat: run with the mods most players have next to Stonkcraft (Sodium, Lithium, Mod Menu; Iris only loads in a real launcher, its refmap fails under dev mappings), from Modrinth's maven.
 if (project.hasProperty("compat")) {
 	repositories {
 		exclusiveContent {
@@ -133,7 +133,7 @@ if (project.hasProperty("join")) {
 	}
 }
 loom.runs.client {
-	vmArg "-Dhypercraft.welcomeShot=" + project.hasProperty("welcomeshot")
+	vmArg "-Dstonkcraft.welcomeShot=" + project.hasProperty("welcomeshot")
 }
 
 // Dev clients get a random name unless told otherwise, and an offline player's UUID comes from the name, so every launch was a

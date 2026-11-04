@@ -1,0 +1,19 @@
+{
+  "parent": "stonkcraft:first_fill",
+  "display": {
+    "icon": {
+      "id": "stonkcraft:copy_desk"
+    },
+    "title": "Copycat",
+    "description": "Have a Copy Desk trade for you",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

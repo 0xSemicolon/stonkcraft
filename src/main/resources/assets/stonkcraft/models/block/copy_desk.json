@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "stonkcraft:block/desk_top",
+    "front": "stonkcraft:block/desk_front",
+    "side": "stonkcraft:block/desk_side"
+  }
+}
