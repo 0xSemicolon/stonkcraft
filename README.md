@@ -121,3 +121,6 @@ Exchange or Mojang.
 
 Bug reports and ideas are welcome in [issues](https://github.com/0xSemicolon/stonkcraft/issues). To build from source,
 see [docs/DEVELOPING.md](docs/DEVELOPING.md). Stonkcraft is [MIT licensed](LICENSE).
+
+Stonkcraft was built with an AI coding assistant (Claude), which wrote most of the code, the scripts that draw the
+textures, and much of the documentation, under the author's direction, design and testing.

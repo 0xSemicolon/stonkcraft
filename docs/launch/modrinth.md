@@ -60,5 +60,7 @@ data, has no telemetry, and makes no other connections.
 - It's a fan project, not affiliated with or endorsed by any exchange or data provider, the NYSE or Mojang.
 - Markets are shown with generic pictures or lettered badges, never other companies' logos.
 - Server owners: `config/stonkcraft.json` controls starter grants, the paper mint, leverage and fees.
+- How it's made: Stonkcraft was built with an AI coding assistant (Claude), which wrote most of the code, the scripts
+  that draw the textures, and much of this page, under the author's direction, design and testing.
 
 Source, full docs and issues: [GitHub](https://github.com/0xSemicolon/stonkcraft)
