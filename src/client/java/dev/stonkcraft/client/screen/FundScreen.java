@@ -42,11 +42,10 @@ public class FundScreen extends HcScreen {
 	/** Dollar value of the coins in the player's inventory that this account accepts. */
 	private long carried() {
 		JsonObject a = acct();
-		if (a == null || !a.has("backing") || minecraft == null || minecraft.player == null) return 0;
-		String backing = a.get("backing").getAsString();
+		if (a == null || !"PAPER".equals(a.get("label").getAsString()) || minecraft == null || minecraft.player == null) return 0;
 		var inv = minecraft.player.getInventory();
 		long usd = 0;
-		for (int i = 0; i < inv.getContainerSize(); i++) usd += Coins.value(inv.getItem(i), backing);
+		for (int i = 0; i < inv.getContainerSize(); i++) usd += Coins.value(inv.getItem(i));
 		return usd;
 	}
 

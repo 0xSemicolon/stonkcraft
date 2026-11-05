@@ -114,7 +114,7 @@ public class AccountVaultBlockEntity extends HcBlockEntity {
 		super.collectImplicitComponents(builder);
 		if (accountId != null) {
 			Account a = accountData();
-			builder.set(ModComponents.ACCOUNT, new ModComponents.AccountRef(accountId.toString(), a == null ? displayName : a.name, "", "", ""));
+			builder.set(ModComponents.ACCOUNT, new ModComponents.AccountRef(accountId.toString(), a == null ? displayName : a.name));
 		}
 	}
 
@@ -131,7 +131,7 @@ public class AccountVaultBlockEntity extends HcBlockEntity {
 		public long insert(ItemVariant resource, long maxAmount, TransactionContext tx) {
 			Account a = accountData();
 			if (a == null || a.kind != Account.Kind.PAPER) return 0;
-			long each = Coins.value(resource.toStack(1), "paper");
+			long each = Coins.value(resource.toStack(1));
 			if (each == 0) return 0;
 			updateSnapshots(tx);
 			pendingUsd += each * maxAmount;

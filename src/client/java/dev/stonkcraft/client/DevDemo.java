@@ -284,7 +284,7 @@ public final class DevDemo {
 		((AccountVaultBlockEntity) level.getBlockEntity(new BlockPos(1, -60, -6))).bind(funding);
 		// coins in the hopper drain into Funding Farm on their own
 		Container hopper = (Container) level.getBlockEntity(new BlockPos(1, -59, -6));
-		hopper.setItem(0, Coins.stack((CoinItem) ModItems.NOTE, 25, "paper"));
+		hopper.setItem(0, Coins.stack((CoinItem) ModItems.NOTE, 25));
 		// cards into the executors (BTC trades Momentum, ETH trades Funding)
 		((HcBlockEntity) level.getBlockEntity(new BlockPos(-4, -60, -2))).swapCard(card(momentum));
 		((HcBlockEntity) level.getBlockEntity(new BlockPos(4, -60, -2))).swapCard(card(funding));

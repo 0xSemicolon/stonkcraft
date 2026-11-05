@@ -141,12 +141,6 @@ public final class ClientState {
 		TICKERS.putAll(next);
 	}
 
-	/** Mid price by exchange asset index, NaN if unknown. Used to sanity-check TWAP sizes before signing. */
-	public static double midForAsset(int index) {
-		for (Ticker t : TICKERS.values()) if (t.assetIndex == index) return t.mid;
-		return Double.NaN;
-	}
-
 	@Nullable
 	public static Ticker ticker(String coin) {
 		if (coin == null) return null;

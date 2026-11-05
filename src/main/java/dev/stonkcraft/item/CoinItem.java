@@ -8,7 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 
-/** Physical paper USDC. Coins from before live trading was removed (backed by testnet or mainnet) count as paper too. */
+/** Physical paper money: deposit it into a paper account at an Account Vault. */
 public class CoinItem extends Item {
 	public final long value;
 	private final String noun;

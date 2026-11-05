@@ -7,10 +7,9 @@ import org.jetbrains.annotations.Nullable;
 public final class Account {
 	/**
 	 * PAPER: a simulated ledger. WATCH: any Hyperliquid mainnet address, read-only; its card drives sensors, displays
-	 * and copy trading but can't trade or hold coins. LIVE only appears in saves from before live trading was removed,
-	 * and is migrated to WATCH on load.
+	 * and copy trading but can't trade or hold coins.
 	 */
-	public enum Kind { PAPER, WATCH, @Deprecated LIVE }
+	public enum Kind { PAPER, WATCH }
 
 	public UUID id;
 	public String name;
@@ -140,11 +139,6 @@ public final class Account {
 	public void log(String actor, String via, String text, boolean ok) {
 		activity.addFirst(new Activity(System.currentTimeMillis(), actor, via, text, ok));
 		while (activity.size() > 100) activity.removeLast();
-	}
-
-	/** Which coins this account accepts: every coin is paper money; watch accounts take none. */
-	public String backing() {
-		return kind == Kind.PAPER ? "paper" : "watch:" + address;
 	}
 
 	/** What players see next to the name: PAPER or WATCH. */

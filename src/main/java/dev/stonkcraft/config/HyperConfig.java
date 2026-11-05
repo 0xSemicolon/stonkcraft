@@ -27,8 +27,6 @@ public class HyperConfig {
 	public boolean buildMenu = false;
 	/** Paper coins every player receives once, on first join. 0: money comes in through Commodity Exchange, from goods. */
 	public double paperStarterGrant = 0;
-	/** Balance given to accounts migrated from the old one-account-per-player format. */
-	public double paperStartingBalance = 100_000;
 	/** The paper mint: players can print paper money for free from the Fund screen. Off: ops can still /stonk mint. */
 	public boolean paperFaucet = false;
 	/** Players can watch any Hyperliquid address read-only (no keys involved) and wire its figures to redstone. */

@@ -140,13 +140,6 @@ class AccessPolicyTest {
 	}
 
 	@Test
-	void ownerOnlyActions() {
-		assertNull(AccessPolicy.checkOwner(acct, owner));
-		assertNotNull(AccessPolicy.checkOwner(acct, alice));
-		assertNotNull(AccessPolicy.checkOwner(acct, null));
-	}
-
-	@Test
 	void guardedAccountRefusesAndLogsWithoutTouchingTheAccount() {
 		Map<String, Double> mids = new java.util.HashMap<>(Map.of("BTC", 80_000.0, "ETH", 2_400.0));
 		MarketData.Asset btc = new MarketData.Asset("BTC", 0, 5, 40);

@@ -23,12 +23,6 @@ public final class AccessPolicy {
 		return g.role == Account.Role.TRADE ? Level.TRADE : Level.VIEW;
 	}
 
-	/** Owner-only actions: withdraw, close, rename, print cards, keys, permissions, transfers. */
-	@Nullable
-	public static String checkOwner(Account a, @Nullable UUID who) {
-		return who != null && a.owner.equals(who) ? null : "Only " + (a.ownerName.isEmpty() ? "the owner" : a.ownerName) + " can do that";
-	}
-
 	/** Cancels only reduce risk, so they're allowed for traders even while the account is frozen. */
 	@Nullable
 	public static String checkCancel(Account a, @Nullable UUID who, long now) {

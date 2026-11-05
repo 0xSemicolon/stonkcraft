@@ -37,21 +37,6 @@ public enum SensorMode {
 	MARKET_OPEN("NYSE open", null, null, "On while the New York Stock Exchange is open (09:30-16:00 New York time, trading days)"),
 	MARKET_BELL("NYSE bell", null, null, "Pulses for a second at the opening and the closing bell");
 
-	/** Reads the Signal Card in the card slot. */
-	public boolean isSignal() {
-		return name().startsWith("SIGNAL_");
-	}
-
-	/** Reads the exchange clock; no coin or card needed. */
-	public boolean isClock() {
-		return this == MARKET_OPEN || this == MARKET_BELL;
-	}
-
-	/** Reads one of the card account's figures (AccountMetric) rather than a market. */
-	public boolean isAccount() {
-		return name().startsWith("ACCOUNT_");
-	}
-
 	public final String label;
 	@Nullable
 	public final String aLabel;

@@ -14,14 +14,4 @@ public enum OrderStatus {
 	public boolean isOpen() {
 		return this == RESTING || this == PARTIAL;
 	}
-
-	/** Maps Hyperliquid's orderStatus strings ("open", "filled", "canceled", "marginCanceled", "rejected"...). */
-	public static OrderStatus fromExchange(String s) {
-		if (s == null) return NONE;
-		if (s.equals("open") || s.equals("triggered")) return RESTING;
-		if (s.equals("filled")) return FILLED;
-		if (s.endsWith("Rejected") || s.equals("rejected")) return REJECTED;
-		if (s.toLowerCase(java.util.Locale.ROOT).contains("cancel")) return CANCELLED;
-		return NONE;
-	}
 }

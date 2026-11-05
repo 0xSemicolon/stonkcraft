@@ -28,7 +28,7 @@ public class VaultSetupScreen extends HcScreen {
 		if (minecraft == null || minecraft.player == null) return 0;
 		var inv = minecraft.player.getInventory();
 		long usd = 0;
-		for (int i = 0; i < inv.getContainerSize(); i++) usd += dev.stonkcraft.item.Coins.value(inv.getItem(i), "paper");
+		for (int i = 0; i < inv.getContainerSize(); i++) usd += dev.stonkcraft.item.Coins.value(inv.getItem(i));
 		return usd;
 	}
 

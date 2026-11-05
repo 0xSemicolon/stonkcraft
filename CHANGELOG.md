@@ -2,6 +2,12 @@
 
 The release workflow publishes the section whose heading contains the tag's version.
 
+## 0.9.1-beta
+
+- Account Vault: the withdraw quick-fills are now 25% / 50% / 75% / Max of the free balance, instead of fixed dollar amounts.
+- Hints in market fields use stocks and commodities as examples (`GOLD`, `SP500`).
+- Removed leftover code from before Stonkcraft was paper-only: unused account and coin fields and old save migrations.
+
 ## 0.9.0-beta
 
 First public beta of **Stonkcraft**: paper-trade stocks, indices and commodities at live prices in Minecraft.

@@ -156,7 +156,7 @@ public class AccessScreen extends HcScreen {
 			hours.numeric(1).suffix("hours").hint("never").tip("Access ends after this many hours. Blank or 0 = never");
 			y = f.row("Markets", 14);
 			markets = f.add(field(f.left + 80, y, 160, "markets", ""));
-			markets.hint("all markets").tip("Only these markets, separated by spaces, e.g. BTC ETH. Blank = all");
+			markets.hint("all markets").tip("Only these markets, separated by spaces, e.g. GOLD SP500. Blank = all");
 			f.add(new HcButton(f.left + 246, y, f.width - 246, 14, (reduceOnly ? "■" : "□") + " Reduce-only", b -> {
 				reduceOnly = !reduceOnly;
 				b.label((reduceOnly ? "■" : "□") + " Reduce-only");
@@ -187,7 +187,7 @@ public class AccessScreen extends HcScreen {
 		})).tip("Grants it now, as the line above says; revoke it any time");
 	}
 
-	/** "Alex can trade BTC, ETH up to $500/order at ≤5x for 24h". */
+	/** "Alex can trade GOLD, SP500 up to $500/order at ≤5x for 24h". */
 	private String preview() {
 		String name = who == null || who.getValue().isBlank() ? "They" : who.getValue().trim();
 		if (!trade) return name + " can view this account" + expiry();
@@ -238,7 +238,7 @@ public class AccessScreen extends HcScreen {
 		f.heading("Print a card");
 		int y = f.row("Markets", 14);
 		cardMarkets = f.add(field(f.left + 60, y, 120, "card markets", ""));
-		cardMarkets.hint("all markets").tip("A Trade Card for only these markets, separated by spaces, e.g. BTC ETH. Blank = all");
+		cardMarkets.hint("all markets").tip("A Trade Card for only these markets, separated by spaces, e.g. GOLD SP500. Blank = all");
 		f.add(new HcButton(f.left + 186, y, f.width - 186, 14, (cardReduce ? "■" : "□") + " Reduce-only", b -> {
 			cardReduce = !cardReduce;
 			b.label((cardReduce ? "■" : "□") + " Reduce-only");

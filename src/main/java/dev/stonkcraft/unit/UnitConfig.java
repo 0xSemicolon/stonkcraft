@@ -257,14 +257,6 @@ public final class UnitConfig {
 		return (t.token.startsWith("U") ? t.token.substring(1) : t.token).toLowerCase(java.util.Locale.ROOT);
 	}
 
-	/** Names of what a bridge takes, for messages: "gold, copper, iron, diamond, netherite or coal". */
-	public String accepted() {
-		List<String> names = new ArrayList<>();
-		for (Token t : tokens) names.add((t.token.startsWith("U") ? t.token.substring(1) : t.token).toLowerCase(java.util.Locale.ROOT));
-		if (names.size() < 2) return String.join("", names);
-		return String.join(", ", names.subList(0, names.size() - 1)) + " or " + names.get(names.size() - 1);
-	}
-
 	public static Path path() {
 		return net.fabricmc.loader.api.FabricLoader.getInstance().getConfigDir().resolve("stonkcraft-exchange.json");
 	}

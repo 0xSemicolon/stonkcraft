@@ -36,7 +36,7 @@ public class AccountDisplayScreen extends BlockConfigScreen {
 
 	@Override
 	protected String coinHint() {
-		return metric == AccountMetric.ORDERS ? "all markets" : "e.g. BTC";
+		return metric == AccountMetric.ORDERS ? "all markets" : "e.g. GOLD";
 	}
 
 	@Override

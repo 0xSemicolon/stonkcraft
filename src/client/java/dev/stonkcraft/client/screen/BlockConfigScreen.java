@@ -43,7 +43,7 @@ public abstract class BlockConfigScreen extends HcScreen {
 
 	/** What a blank coin means for this block, shown inside the empty field. */
 	protected String coinHint() {
-		return "e.g. BTC";
+		return "e.g. GOLD";
 	}
 
 	/** The block's own rows, below the coin. */

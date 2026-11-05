@@ -1,6 +1,5 @@
 package dev.stonkcraft.item;
 
-import dev.stonkcraft.registry.ModComponents;
 import dev.stonkcraft.registry.ModItems;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,7 @@ public final class Coins {
 	}
 
 	/** Greedy split of whole dollars into stacks (64 max each). */
-	public static List<ItemStack> make(long dollars, String backing) {
+	public static List<ItemStack> make(long dollars) {
 		List<ItemStack> out = new ArrayList<>();
 		long remaining = dollars;
 		for (CoinItem coin : denominations()) {
@@ -24,23 +23,20 @@ public final class Coins {
 			remaining -= n * coin.value;
 			while (n > 0) {
 				int take = (int) Math.min(64, n);
-				out.add(stack(coin, take, backing));
+				out.add(stack(coin, take));
 				n -= take;
 			}
 		}
 		return out;
 	}
 
-	public static ItemStack stack(CoinItem coin, int count, String backing) {
-		ItemStack s = new ItemStack(coin, count);
-		s.set(ModComponents.BACKING, backing);
-		return s;
+	public static ItemStack stack(CoinItem coin, int count) {
+		return new ItemStack(coin, count);
 	}
 
-	/** Dollar value of a stack going into an account with this backing; only paper accounts take coins. */
-	public static long value(ItemStack stack, String backing) {
-		if (!(stack.getItem() instanceof CoinItem coin)) return 0;
-		return "paper".equals(backing) ? coin.value * stack.getCount() : 0;
+	/** Dollar value of a stack of paper coins (0 for anything else). Only paper accounts take coins. */
+	public static long value(ItemStack stack) {
+		return stack.getItem() instanceof CoinItem coin ? coin.value * stack.getCount() : 0;
 	}
 
 	/** Pure change-making, exposed for tests: counts of [bars, notes, chips]. */

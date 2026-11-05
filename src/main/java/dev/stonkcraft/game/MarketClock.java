@@ -44,15 +44,6 @@ public final class MarketClock {
 		offsetMs = epochMs - System.currentTimeMillis();
 	}
 
-	/** The next regular-session open strictly after {@code epochMs}. */
-	public static long nextOpen(long epochMs) {
-		ZonedDateTime t = Instant.ofEpochMilli(epochMs).atZone(NEW_YORK);
-		LocalDate d = t.toLocalDate();
-		if (!t.toLocalTime().isBefore(OPEN)) d = d.plusDays(1);
-		while (!tradingDay(d)) d = d.plusDays(1);
-		return d.atTime(OPEN).atZone(NEW_YORK).toInstant().toEpochMilli();
-	}
-
 	public static boolean tradingDay(LocalDate d) {
 		DayOfWeek w = d.getDayOfWeek();
 		return w != DayOfWeek.SATURDAY && w != DayOfWeek.SUNDAY && !HOLIDAYS.contains(d);

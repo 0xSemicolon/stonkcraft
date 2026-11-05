@@ -117,12 +117,12 @@ public class SignalMixerScreen extends HcScreen {
 			textBox.setMaxLength(200);
 			textBox.hint(switch (op) {
 				case ADDRESS -> "0x…";
-				case BASKET -> "BTC:0.5, ETH:0.3";
-				case FILTER -> "BTC ETH";
-				case PICK -> "BTC, GROSS or NET";
-				case METRIC -> "EQUITY, PNL_DAY, POSITION:BTC…";
+				case BASKET -> "GOLD:0.5, SP500:0.3";
+				case FILTER -> "GOLD SP500";
+				case PICK -> "GOLD, GROSS or NET";
+				case METRIC -> "EQUITY, PNL_DAY, POSITION:GOLD…";
 				case OPEN_ORDERS -> "blank = every market";
-				default -> "e.g. BTC";
+				default -> "e.g. GOLD";
 			});
 		}
 		param(f, op.aLabel, true);

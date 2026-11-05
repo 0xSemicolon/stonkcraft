@@ -319,7 +319,7 @@ public final class ServerNet {
 			case "vault_withdraw" -> vaultWithdraw(player, reg, body);
 			case "deposit_coins" -> {
 				Account a = reg.get(uuid(body, "id"));
-				if (a == null || !reg.canAccess(player, a)) return;
+				if (a == null || !reg.canView(player, a)) return;
 				depositCoins(player, reg, a);
 			}
 			case "unit_info" -> {
@@ -532,14 +532,14 @@ public final class ServerNet {
 		}
 	}
 
-	/** Sweeps every coin of the account's backing out of the player's inventory and deposits it. */
+	/** Sweeps every paper coin out of the player's inventory and deposits it. */
 	public static void depositCoins(ServerPlayer player, AccountRegistry reg, Account a) {
 		var inv = player.getInventory();
 		List<ItemStack> taken = new ArrayList<>();
 		long usd = 0;
 		for (int i = 0; i < inv.getContainerSize(); i++) {
 			ItemStack s = inv.getItem(i);
-			long v = Coins.value(s, a.backing());
+			long v = a.kind == Account.Kind.PAPER ? Coins.value(s) : 0;
 			if (v == 0) continue;
 			usd += v;
 			taken.add(s.copy());
@@ -581,7 +581,7 @@ public final class ServerNet {
 			if (wait > 0) return "The mint is cooling down, try again in " + (wait / 1000 + 1) + "s";
 		}
 		LAST_MINT.put(player.getUUID(), now);
-		for (ItemStack s : Coins.make(usd, "paper")) give(player, s);
+		for (ItemStack s : Coins.make(usd)) give(player, s);
 		vaultResult(player, true, "Minted " + Fmt.usd(usd) + " in paper coins");
 		return null;
 	}
@@ -784,7 +784,7 @@ public final class ServerNet {
 			reg.save();
 		}
 		ItemStack s = new ItemStack(watch ? ModItems.WATCH_CARD : ModItems.ACCOUNT_CARD);
-		s.set(ModComponents.ACCOUNT, new ModComponents.AccountRef(a.id.toString(), a.name, c.id, c.level, ""));
+		s.set(ModComponents.ACCOUNT, new ModComponents.AccountRef(a.id.toString(), a.name, c.id, c.level));
 		if (scope != null) s.set(ModComponents.CARD_SCOPE, scope.summary());
 		if (!c.label.isEmpty()) s.set(net.minecraft.core.component.DataComponents.CUSTOM_NAME, Component.literal(a.name + " · " + c.label));
 		return s;
@@ -793,7 +793,7 @@ public final class ServerNet {
 	/** A vault item or card that carries the account. */
 	private static ItemStack accountItem(Account a, boolean vault) {
 		ItemStack s = new ItemStack(vault ? ModBlocks.VAULT.asItem() : a.kind == Account.Kind.WATCH ? ModItems.WATCH_CARD : ModItems.ACCOUNT_CARD);
-		s.set(ModComponents.ACCOUNT, new ModComponents.AccountRef(a.id.toString(), a.name, "", "", ""));
+		s.set(ModComponents.ACCOUNT, new ModComponents.AccountRef(a.id.toString(), a.name));
 		return s;
 	}
 
@@ -883,7 +883,7 @@ public final class ServerNet {
 			return;
 		}
 		reg.logEvent(a, player, "Withdrew " + Fmt.usd(usd) + " as coins");
-		for (ItemStack s : Coins.make(usd, a.backing())) {
+		for (ItemStack s : Coins.make(usd)) {
 			if (!player.getInventory().add(s)) player.drop(s, false);
 		}
 		player.level().playSound(null, pos, SoundEvents.AMETHYST_CLUSTER_BREAK, SoundSource.BLOCKS, 1f, 1.4f);
@@ -1011,7 +1011,6 @@ public final class ServerNet {
 			o.addProperty("ownerName", a.ownerName);
 			o.addProperty("selected", sel != null && sel.id.equals(a.id));
 			o.addProperty("available", t != null);
-			o.addProperty("backing", a.backing());
 			AccessPolicy.Level lvl = AccessPolicy.level(a, player.getUUID(), System.currentTimeMillis());
 			o.addProperty("access", lvl == AccessPolicy.Level.NONE ? "CARD" : lvl.name());
 			o.addProperty("canTrade", AccessPolicy.checkTrading(a, player.getUUID(), System.currentTimeMillis()) == null);

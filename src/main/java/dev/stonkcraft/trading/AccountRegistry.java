@@ -2,14 +2,12 @@ package dev.stonkcraft.trading;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import dev.stonkcraft.Stonkcraft;
 import dev.stonkcraft.config.HyperConfig;
 import dev.stonkcraft.item.Coins;
 import dev.stonkcraft.market.MarketData;
 import dev.stonkcraft.registry.ModComponents;
 import dev.stonkcraft.registry.ModItems;
-import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -37,7 +35,6 @@ import org.jetbrains.annotations.Nullable;
  */
 public final class AccountRegistry implements GuardedAccount.Auditor {
 	private static final Gson GSON = new GsonBuilder().create();
-	private static final Type LEGACY = new TypeToken<Map<String, PaperAccount.State>>() {}.getType();
 
 	/** Persistent state. */
 	private static final class Saved {
@@ -96,44 +93,11 @@ public final class AccountRegistry implements GuardedAccount.Auditor {
 			if (saved.granted == null) saved.granted = new HashSet<>();
 			for (Account a : saved.accounts) {
 				a.upgrade();
-				migrateLive(a);
 				register(a);
 			}
-			migrateLegacy();
 		} catch (Exception e) {
 			Stonkcraft.LOG.error("Failed to load accounts", e);
 		}
-	}
-
-	/** Live trading was removed: a linked live account becomes a read-only mirror of the same address. */
-	private void migrateLive(Account a) {
-		if (a.kind != Account.Kind.LIVE) return;
-		a.kind = Account.Kind.WATCH;
-		a.log("Stonkcraft", "server", "Live trading was removed; this account now follows " + a.address + " read-only", true);
-		dirty = true;
-	}
-
-	/** Old saves had one paper ledger per player; turn each into a named account. */
-	private void migrateLegacy() throws Exception {
-		Path legacy = server.getWorldPath(LevelResource.ROOT).resolve("stonkcraft_paper.json");
-		if (!Files.exists(legacy)) return;
-		Map<String, PaperAccount.State> states = GSON.fromJson(Files.readString(legacy), LEGACY);
-		if (states != null) {
-			states.forEach((id, st) -> {
-				Account a = new Account();
-				a.id = UUID.randomUUID();
-				a.name = "Paper Account";
-				a.owner = UUID.fromString(id);
-				a.kind = Account.Kind.PAPER;
-				if (st.netDeposits == 0) st.netDeposits = HyperConfig.get().paperStartingBalance;
-				a.paper = st;
-				register(a);
-				saved.granted.add(a.owner);
-			});
-		}
-		Files.move(legacy, legacy.resolveSibling("stonkcraft_paper.json.migrated"));
-		Stonkcraft.LOG.info("Migrated {} legacy paper accounts", states == null ? 0 : states.size());
-		save();
 	}
 
 	public void save() {
@@ -216,12 +180,6 @@ public final class AccountRegistry implements GuardedAccount.Auditor {
 		if (AccessPolicy.level(a, p.getUUID(), System.currentTimeMillis()) != AccessPolicy.Level.NONE) return true;
 		if (a.kind == Account.Kind.PAPER && p.hasPermissions(2)) return true;
 		return holdsCard(p, a);
-	}
-
-	/** @deprecated use {@link #canView}; kept for call sites that only display. */
-	@Deprecated
-	public boolean canAccess(ServerPlayer p, Account a) {
-		return canView(p, a);
 	}
 
 	/** The owner, or an op administering a paper account. Gate for money and account management. */
@@ -451,7 +409,7 @@ public final class AccountRegistry implements GuardedAccount.Auditor {
 		}
 		if (saved.granted.add(p.getUUID())) {
 			long grant = (long) HyperConfig.get().paperStarterGrant;
-			for (ItemStack s : Coins.make(grant, "paper")) {
+			for (ItemStack s : Coins.make(grant)) {
 				if (!p.getInventory().add(s)) p.drop(s, false);
 			}
 			if (grant > 0) {

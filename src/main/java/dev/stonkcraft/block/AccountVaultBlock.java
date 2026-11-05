@@ -107,7 +107,7 @@ public class AccountVaultBlock extends HcBlock {
 	}
 
 	private ItemInteractionResult deposit(ServerPlayer sp, InteractionHand hand, ItemStack stack, AccountRegistry reg, Account a, AccountVaultBlockEntity vault) {
-		long usd = Coins.value(stack, a.backing());
+		long usd = a.kind == Account.Kind.PAPER ? Coins.value(stack) : 0;
 		if (usd == 0) {
 			sp.displayClientMessage(Component.literal("§c" + a.name + " is watch-only: it doesn't take coins"), true);
 			return ItemInteractionResult.FAIL;

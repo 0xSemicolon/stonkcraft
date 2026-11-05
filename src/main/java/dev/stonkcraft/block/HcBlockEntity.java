@@ -274,13 +274,6 @@ public abstract class HcBlockEntity extends BlockEntity {
 		return lastStatus > 0 ? 15 : lastStatus < 0 ? 1 : 0;
 	}
 
-	/** The account to act on, or a failed result explaining why there isn't one. */
-	@Nullable
-	protected OrderResult noAccountReason() {
-		if (account() != null) return null;
-		return OrderResult.fail("", cardRef() == null ? "No Trade Card inserted" : "Card's account is unavailable");
-	}
-
 	/** Records an outcome, shows particles and sounds, and tells the owner. Call on the server thread. */
 	protected void announce(ServerLevel level, OrderResult r) {
 		if (isRemoved()) return;

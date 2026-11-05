@@ -693,7 +693,7 @@ public class TerminalScreen extends Screen {
 	private static final String[] SHORT_TABS = {"Pos", "Orders", "TWAP", "Fills", "Fund", "Bal"};
 	private static final String[] TINY_TABS = {"Pos", "Ord", "TWP", "Fil", "Fnd", "Bal"};
 
-	/** Closing a position takes two clicks within 3s: the first arms that action (keyed "close BTC"), the second runs it. */
+	/** Closing a position takes two clicks within 3s: the first arms that action (keyed "close GOLD"), the second runs it. */
 	private String armedAction = "";
 	private long armedAt;
 

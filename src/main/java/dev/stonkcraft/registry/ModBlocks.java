@@ -95,7 +95,7 @@ public final class ModBlocks {
 						out.accept(KILL_SWITCH);
 						out.accept(SIGNAL_MIXER);
 						out.accept(COPY_DESK);
-						for (CoinItem coin : Coins.denominations()) out.accept(Coins.stack(coin, 1, "paper"));
+						for (CoinItem coin : Coins.denominations()) out.accept(Coins.stack(coin, 1));
 					})
 					.build());
 

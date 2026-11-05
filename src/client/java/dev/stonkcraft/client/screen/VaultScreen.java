@@ -12,7 +12,8 @@ import net.minecraft.client.gui.GuiGraphics;
 
 /** An account's vault: balances, withdraw to coins, cards and sharing, rename, close, jump to the terminal. */
 public class VaultScreen extends HcScreen {
-	private static final long[] QUICK = {100, 1_000, 10_000};
+	/** Quick fills, as shares of the free balance; 100 is Max. */
+	private static final int[] QUICK_PCT = {25, 50, 75, 100};
 
 	private final long pos;
 	private final String id;
@@ -109,15 +110,13 @@ public class VaultScreen extends HcScreen {
 				return v <= 0 ? "Enter an amount" : a.has("withdrawable") && v > a.get("withdrawable").getAsDouble() + 0.5 ? "More than the free balance" : null;
 			});
 			int qx = f.left + 90;
-			for (long q : QUICK) {
-				String label = q >= 1000 ? "$" + q / 1000 + "K" : "$" + q;
-				f.add(new HcButton(qx, y, 36, 14, label, b -> amount.setValue(String.valueOf(q)))).tip("Fills in " + Fmt.usd(q));
+			for (int pct : QUICK_PCT) {
+				f.add(new HcButton(qx, y, 36, 14, pct == 100 ? "Max" : pct + "%", b -> {
+					JsonObject acc = acct();
+					if (acc != null && acc.has("withdrawable")) amount.setValue(String.valueOf((long) Math.floor(acc.get("withdrawable").getAsDouble() * pct / 100)));
+				})).tip(pct == 100 ? "Everything not tied up as margin" : pct + "% of the free balance (not tied up as margin)");
 				qx += 40;
 			}
-			f.add(new HcButton(qx, y, 36, 14, "Max", b -> {
-				JsonObject acc = acct();
-				if (acc != null && acc.has("withdrawable")) amount.setValue(String.valueOf((long) Math.floor(acc.get("withdrawable").getAsDouble())));
-			}).tip("Everything not tied up as margin"));
 			afterY = f.reserve(9);
 			int half = (f.width - 6) / 2;
 			y = f.row(null, ROW);

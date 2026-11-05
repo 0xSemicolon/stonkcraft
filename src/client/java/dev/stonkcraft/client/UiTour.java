@@ -135,7 +135,7 @@ public final class UiTour {
 		// a read card as printed before Watch Cards (on the trade item): it should turn into a Watch Card in the pocket
 		ItemStack old = new ItemStack(dev.stonkcraft.registry.ModItems.ACCOUNT_CARD);
 		var rec = reg.issueCard(acct, "READ", "legacy");
-		old.set(dev.stonkcraft.registry.ModComponents.ACCOUNT, new dev.stonkcraft.registry.ModComponents.AccountRef(acct.id.toString(), acct.name, rec.id, rec.level, ""));
+		old.set(dev.stonkcraft.registry.ModComponents.ACCOUNT, new dev.stonkcraft.registry.ModComponents.AccountRef(acct.id.toString(), acct.name, rec.id, rec.level));
 		p.getInventory().setItem(30, old);
 		for (int i = 0; i < BLOCKS.length; i++) {
 			BlockPos b = spot(i);
@@ -400,6 +400,7 @@ public final class UiTour {
 					press(mc, "↑ Withdraw");
 				});
 				steps.add(() -> shot(mc, name + "_w_withdraw"));
+				steps.add(() -> press(mc, "Iron"));
 				steps.add(() -> press(mc, "9"));
 				steps.add(() -> server.execute(() -> Stonkcraft.LOG.info("UiTour: withdraw tab: pressed 9: iron ingots +{}, iron blocks {}, UIRON left {}",
 						player(server).getInventory().countItem(net.minecraft.world.item.Items.IRON_INGOT) - ironBefore[0], player(server).getInventory().countItem(net.minecraft.world.item.Items.IRON_BLOCK), Stonkcraft.accounts().paper(acct.id).spotBalance("UIRON/USDC"))));
@@ -534,7 +535,7 @@ public final class UiTour {
 	private static int coins(ServerPlayer p) {
 		long usd = 0;
 		var inv = p.getInventory();
-		for (int i = 0; i < inv.getContainerSize(); i++) usd += dev.stonkcraft.item.Coins.value(inv.getItem(i), "paper");
+		for (int i = 0; i < inv.getContainerSize(); i++) usd += dev.stonkcraft.item.Coins.value(inv.getItem(i));
 		return (int) usd;
 	}
 
@@ -548,7 +549,7 @@ public final class UiTour {
 			eth[0] = t.positionSize("xyz:SILVER");
 			// far from any terminal it's refused
 			p.teleportTo(p.serverLevel(), tPos.getX() + 30.5, tPos.getY(), tPos.getZ() + 0.5, 180, 0);
-			cmd(server, "hl buy eth 100");
+			cmd(server, "stonk buy silver 100");
 		}));
 		steps.add(() -> server.execute(() -> {
 			ServerPlayer p = player(server);
@@ -557,10 +558,10 @@ public final class UiTour {
 			p.serverLevel().setBlock(tPos, BuiltInRegistries.BLOCK.get(Stonkcraft.id("trading_terminal")).defaultBlockState(), 3);
 			p.teleportTo(p.serverLevel(), tPos.getX() + 0.5, tPos.getY(), tPos.getZ() + 2.5, 180, 0);
 			ServerNet.openedTerminal(p, tPos);
-			cmd(server, "hl buy eth 100");
+			cmd(server, "stonk buy silver 100");
 			double at = Stonkcraft.accounts().trading(acct.id).positionSize("xyz:SILVER") - eth[0] - away;
 			var paper = Stonkcraft.accounts().paper(acct.id);
-			Stonkcraft.LOG.info("UiTour: terminal only: away from a terminal ETH +{}, at one ETH +{}; spot USDC {}, perps free {}",
+			Stonkcraft.LOG.info("UiTour: terminal only: away from a terminal SILVER +{}, at one SILVER +{}; spot USDC {}, perps free {}",
 					dev.stonkcraft.trading.Fmt.size(away), dev.stonkcraft.trading.Fmt.size(at), dev.stonkcraft.trading.Fmt.usd(paper.spotUsdc()), dev.stonkcraft.trading.Fmt.usd(paper.withdrawable()));
 		}));
 	}
@@ -651,7 +652,7 @@ public final class UiTour {
 			ServerPlayer p = player(server);
 			cmd(server, "scoreboard objectives add hc_tour dummy");
 			p.setItemInHand(InteractionHand.MAIN_HAND, printed[0].copy());
-			cmd(server, "hl signal score hc_tour 1");
+			cmd(server, "stonk signal score hc_tour 1");
 			// the display's card comes out: its printed card should go dark
 			var display = at(server, "account_display", dev.stonkcraft.block.AccountDisplayBlockEntity.class);
 			player(server).getInventory().add(display.swapCard(ItemStack.EMPTY));
